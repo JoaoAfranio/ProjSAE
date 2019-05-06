@@ -52,6 +52,18 @@
               <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               <span class="menu-title">Resultado</span>
             </a>
-          </li>                     
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../funcionario/Funcionario.php">
+              <i class="mdi mdi-account menu-icon"></i>
+              <span class="menu-title">Gerenciar Usuário</span>
+            </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../template/header.php?acao=logout">
+              <i class="mdi mdi-account menu-icon"></i>
+              <span class="menu-title">Sair</span>
+            </a> 
+          </li>                      
         </ul>
       </nav>

@@ -33,7 +33,7 @@
 		 	$res = $listar->fetchAll(PDO::FETCH_ASSOC);
 		 	return $res;
 		 }
-
+		 
 		public function listarDiagnosticos($idResultado){
 			$listarDiagnosticos = $this->bd->query("SELECT * from resultado WHERE idResultado = " . $idResultado);
 			$listarDiagnosticos->bindParam(":idResultado", $idResultado);
@@ -48,7 +48,19 @@
             $excluir->bindParam(":idResultado", $idResultado);
             $excluir->bindParam(":idDiagnostico", $idDiagnostico);
             $excluir->execute();
-        }
+		}
+		
+		public function listarResultadosPorDiagnostico($idDiagnostico){
+			$listarResultadosID = $this->bd->query("SELECT * from resultado WHERE idDiagnostico = " . $idDiagnostico);
+		    $listarResultadosID->bindParam(":idDiagnostico", $idDiagnostico);
+
+			$res = $listarResultadosID->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
+
+
+
+
 	}
 
 

@@ -14,7 +14,9 @@
 
 		$prescricaoDiagnosticoModel->inserir($idDiagnostico, $idPrescricao);
 
-	    echo "<script>location.href='../prescricao/Prescricao.php?cad=sucesso';</script>";
+		echo "<script>location.href='../prescricao/Prescricao.php?cad=sucesso';</script>";
+		exit();
+		
 	}
 
 	if($acao = "deletar"){
@@ -26,7 +28,7 @@
 	}
 
 
-
+	
 	
 
 

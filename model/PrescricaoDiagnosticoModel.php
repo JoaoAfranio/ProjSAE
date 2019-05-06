@@ -15,7 +15,7 @@
 
 		 public function inserir($idDiagnostico, $idPrescricao){
 
-		 	$insercao = $this->bd->prepare("INSERT INTO diagnosticoprescricao (IdDiagnostico, IdPrescricao) VALUES (:idDiagnostico, :idPrescricao)");
+			$insercao = $this->bd->prepare("INSERT INTO diagnosticoprescricao (IdDiagnostico, IdPrescricao) VALUES (:idDiagnostico, :idPrescricao)");
             $insercao->bindParam(":idDiagnostico", $idDiagnostico);
             $insercao->bindParam(":idPrescricao", $idPrescricao);
 		 	$insercao->execute();

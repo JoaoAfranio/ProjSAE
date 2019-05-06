@@ -1,6 +1,7 @@
 <?php 
     require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AfirmativaModel.php";
-    
+
+
 
     $questao = new QuestaoModel();
     $afirmativa = new AfirmativaModel();
@@ -9,7 +10,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h4>Questões cadastradas</h4>
+        <h4>Perguntas cadastradas</h4>
         <div class="table-responsive">
             <table id="order-listing" class="table">
                 <thead>

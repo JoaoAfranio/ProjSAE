@@ -50,7 +50,16 @@
 
             $res = $listarUm->fetch(PDO::FETCH_ASSOC);
             return $res;
-         }
+		 }
+		 
+		 public function listarUnidade($idUnidadeInternacao){
+			 $listarUnidade = $this->bd->prepare("SELECT * from unidadeinternacao where IdUnidadeInternacao = :idUnidadeInternacao");
+			 $listarUnidade->bindParam(":idUnidadeInternacao", $idUnidadeInternacao, PDO::PARAM_INT);
+			 $listarUnidade->execute();
+ 
+			 $res = $listarUnidade->fetch(PDO::FETCH_ASSOC);
+			 return $res;
+		 }
 
 
 	}

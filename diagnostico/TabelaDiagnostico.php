@@ -9,7 +9,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h4>Questões cadastradas</h4>
+        <h4>Diagnósticos cadastrados</h4>
         <div class="table-responsive">
             <table id="order-listing" class="table">
                 <thead>
@@ -17,6 +17,7 @@
                         <th>Ordem #</th>
                         <th>Diagnóstico</th>
                         <th>Prescrições</th>
+                        <th>Unidade de Internação</th>
                         <th>Deletar</th>
                     </tr>
                 </thead>
@@ -52,6 +53,10 @@
                                     <?php } ?>      
                                                 
 
+                            </td>
+                            <td>
+                                <?php $resUnidade = $diagnostico->listarUnidade($diag['IdUnidadeInternacao']);
+                                echo $resUnidade['NomeUnidade'];?>
                             </td>
                             <td>
                                 <form class="forms-sample" method="post" action="../controller/DiagnosticoController.php?acao=deletar">

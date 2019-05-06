@@ -1,3 +1,40 @@
+<?php 
+  session_start();
+
+  if(isset($_GET['acao']) && $_GET['acao'] == 'logout'){
+
+    session_destroy();
+
+    header("Location:/sae/index.php");
+
+  }
+
+ 	if(!isset($_SESSION["sessIdTime"])){
+
+    $_SESSION["sessIdTime"] = time();
+
+  }elseif(time() - $_SESSION["sessIdTime"] > 1000){
+
+    $_SESSION = [];
+    session_destroy();
+
+  }else{
+    $_SESSION["sessIdTime"] = time();
+  }
+
+
+  if(!isset($_SESSION["logado"])){
+    header("Location:/sae/index.php");
+    exit();
+  }
+  
+  if($_SESSION["TipoFuncionario"]!="administrador"){
+    header("Location:/sae/index.php");
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,4 +54,5 @@
   <link rel="stylesheet" href="../css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.ico" />
+
 </head>
