@@ -18,7 +18,7 @@
             </p>
             <form class="forms-sample" method="post" action="../controller/PrescricaoDiagnosticoController.php?acao=cadastrar">
                 <div class="form-group">
-                    <label for="inputPergunta">Selecione a questão</label>
+                    <label for="inputPergunta">Selecione o diagnóstico</label>
                     <select class="form-control" name="idDiagnostico">
                         <?php 
                             foreach ($resDiagnostico as $Diagnostico) {

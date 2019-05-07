@@ -1,10 +1,12 @@
 <?php 
     require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AfirmativaModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AfirmativaQuestaoModel.php";
 
 
 
     $questao = new QuestaoModel();
     $afirmativa = new AfirmativaModel();
+    $afirmativaQuestao = new AfirmativaQuestaoModel();
     $resQuestao = $questao->listarTodos();
 ?>
 
@@ -16,6 +18,7 @@
                 <thead>
                     <tr>
                         <th>Ordem #</th>
+                        <th>Visualizar</th>
                         <th>Questão</th>
                         <th>Afirmativas</th>
                         <th>Deletar</th>
@@ -30,6 +33,102 @@
 
                         <tr>    
                             <td><?php echo $ordem;?></td>
+                            <td><div style="text-align:center;"><button type="button" data-toggle="modal" data-target="#Modal-<?php echo $quest['IdQuestao'];?>" class="btn btn-primary mr-2"><i class="mdi mdi-magnify menu-icon"></i></button></div></td>
+
+                             <div class="modal fade" id="Modal-<?php echo $quest['IdQuestao'];?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-<?php echo $quest['IdQuestao'];?>" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="ModalLabel-<?php echo $quest['IdQuestao'];?>">Visualizando questão</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                                <p><?php echo $quest['Descricao'];?></p>
+                                                <?php // Formar campo de acordo com o tipo da questão
+                                                    // Aberta = 1
+                                                    // Fechada Escolha Unica = 2
+                                                    // Fechada Escolha Múltipla = 3
+                                                    // Data = 4
+                                                    // Afirmação ou Negação = 5
+
+
+                                                    if($quest['IdTipoQuestao'] == 1){
+                                                        echo '<input type="text" class="form-control">';
+                                                    }
+                                                    if($quest['IdTipoQuestao'] == 2){
+                                                    ?> 
+                                                        <div class="form-group">
+                                                        <select class="form-control" <?php echo "name=" . $quest['IdQuestao'];?>>
+                                                          <option> -- </option>
+                                                      <?php 
+                                                        //Trazer todas as afirmativas da questão
+                                                      $resAfirmativaQuestao = $afirmativaQuestao->listarTodosIdQuestao($quest['IdQuestao']);
+                                                      foreach($resAfirmativaQuestao as $afirmativaQuest){ 
+                                                          //Buscar o nome das afirmativas
+                                                          $resDescAfirmativa = $afirmativa->listarID($afirmativaQuest['IdAfirmativa']);
+
+                                                          ?> 
+                                                          <option><?php echo $resDescAfirmativa['Descricao'];?></option>
+                                                          
+                                                      <?php } ?>
+                                                        </select>
+                                                      </div>
+
+                                                      <?php
+                                                    }
+                                                    if($quest['IdTipoQuestao'] == 3){ ?>
+                                                        <div class="form-group">
+                                                        <select class="js-example-basic-multiple w-100" multiple="multiple" <?php echo "name='input" . $quest['IdQuestao'] . "'";?>>
+                                                      <?php 
+                                                      //Trazer todas as afirmativas da questão
+                                                      $resAfirmativaQuestao = $afirmativaQuestao->listarTodosIdQuestao($quest['IdQuestao']);
+                                                      foreach($resAfirmativaQuestao as $afirmativaQuest){ 
+
+                                                        //Buscar o nome das afirmativas
+                                                        $resDescAfirmativa = $afirmativa->listarID($afirmativaQuest['IdAfirmativa']);
+                                                          ?> 
+                                                          <option><?php echo $resDescAfirmativa['Descricao'];?></option>
+                                                      <?php } ?>
+                                                        </select>
+                                                      </div>
+                                                   <?php }
+                                                    if($quest['IdTipoQuestao'] == 4){
+                                                        echo '<input type="date" class="form-control">';
+                                                    }
+                                                    if($quest['IdTipoQuestao'] == 5){ ?>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                        <div class="form-check">
+                                                          <label class="form-check-label">
+                                                            <input name="questao" type="radio" class="form-check-input" value="Sim">
+                                                            Sim
+                                                          </label>
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-sm-3">
+                                                        <div class="form-check">
+                                                          <label class="form-check-label">
+                                                            <input name="questao" type="radio" class="form-check-input" value="Não">
+                                                            Não
+                                                          </label>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                   <?php }
+                                                
+                                                ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fim Modal -->
+
                             <td><?php echo $quest['Descricao'];?></td>
                             <td>
 

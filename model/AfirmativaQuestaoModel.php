@@ -35,6 +35,12 @@
 		 	return $res;
 		 }
 
+		 public function listarTodosIdQuestao($idQuestao){
+			$listarTodosIdQuestao = $this->bd->query("SELECT * from questaoafirmativa WHERE idQuestao = " . $idQuestao);
+			$res = $listarTodosIdQuestao->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		 }
+
 
 	}
 

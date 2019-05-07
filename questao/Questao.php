@@ -70,6 +70,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/QuestaoModel.php";
   <script src="../js/iCheck.js"></script>
   <script src="../js/typeahead.js"></script>
   <script src="../js/select2.js"></script>
+  <script src="../js/formpickers.js"></script>
   <script src="../js/alerts.js"></script>
   <script src="../js/avgrund.js"></script>
   <script src="../js/data-table.js"></script>

@@ -8,8 +8,8 @@
           </li>
         </ul>
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="../../index-2.html"><img src="../images/logo.png" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="../../index-2.html"><img src="http://www.urbanui.com/calmui/template/images/logo-mini.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo" href="#"><img src="../images/logo.png" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="#"><img src="../images/logo-mini.png" alt="logo"/></a>
         </div>
         <ul class="navbar-nav navbar-nav-right">
 
@@ -31,25 +31,25 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../afirmativa/Afirmativa.php">
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <i class="mdi mdi-check menu-icon"></i>
               <span class="menu-title">Afirmativas</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../prescricao/Prescricao.php">
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-              <span class="menu-title">Prescrições</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../diagnostico/Diagnostico.php">
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">Diagnósticos</span>
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="../prescricao/Prescricao.php">
+              <i class="mdi mdi-file-powerpoint-box menu-icon"></i>
+              <span class="menu-title">Prescrições</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../resultado/Resultado.php">
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">Resultado</span>
             </a>
           </li>
@@ -61,7 +61,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../template/header.php?acao=logout">
-              <i class="mdi mdi-account menu-icon"></i>
+              <i class="mdi  mdi-exit-to-app menu-icon"></i>
               <span class="menu-title">Sair</span>
             </a> 
           </li>                      

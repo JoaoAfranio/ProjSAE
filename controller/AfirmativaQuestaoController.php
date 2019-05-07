@@ -15,6 +15,7 @@
 		$afirmativaQuestaoModel->inserir($idQuestao, $idAfirmativa);
 
 		echo "<script>location.href='../afirmativa/Afirmativa.php?cad=sucesso';</script>";
+		exit();
 	}
 
 	if($acao = "deletar"){
