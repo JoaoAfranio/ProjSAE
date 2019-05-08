@@ -16,7 +16,7 @@
 		echo "<script>location.href='../prescricao/Prescricao.php?cad=sucesso';</script>";
 	}
 
-	if($acao = "deletar"){
+	if($acao == "deletar"){
 
 		$idPrescricao = $_POST["idPrescricao"];
 		$prescricaoModel->excluir($idPrescricao);

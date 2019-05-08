@@ -11300,7 +11300,7 @@ fieldset:disabled a {
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-  color:##0b81d6;
+  color: ##0b81d6;
   background-color: transparent;
 }
 
@@ -29008,4 +29008,8 @@ div.tagsinput span.tag a {
 .a-noStyle:hover{
   color: white !important;
   text-decoration: none !important;
+}
+
+.select2 , .select2-container ,  .select2-container--default , .select2-container--focus{
+  width: 100% !important;
 }

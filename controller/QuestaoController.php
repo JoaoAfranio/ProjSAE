@@ -17,7 +17,7 @@
 		echo "<script>location.href='../questao/Questao.php?cad=sucesso';</script>";
 	}
 
-	if($acao = "deletar"){
+	if($acao == "deletar"){
 
 		$idQuestao = $_POST["idQuestao"];
 		$questaoModel->excluir($idQuestao);

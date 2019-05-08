@@ -17,7 +17,7 @@
 		echo "<script>location.href='../diagnostico/Diagnostico.php?cad=sucesso';</script>";
 	}
 
-	if($acao = "deletar"){
+	if($acao == "deletar"){
 
 		$idDiagnostico = $_POST["idDiagnostico"];
 		$diagnosticoModel->excluir($idDiagnostico);

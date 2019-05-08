@@ -18,7 +18,7 @@
 		exit();
 	}
 
-	if($acao = "deletar"){
+	if($acao == "deletar"){
 
 		$afirmativaQuestaoModel->excluir($idQuestao, $idAfirmativa);
 

@@ -36,6 +36,18 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="../avaliacao/Avaliacao.php">
+              <i class="mdi mdi-block-helper menu-icon"></i>
+              <span class="menu-title">Avaliações</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../formulario/Formulario.php">
+              <i class="mdi mdi-block-helper menu-icon"></i>
+              <span class="menu-title">Formulários</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../diagnostico/Diagnostico.php">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">Diagnósticos</span>

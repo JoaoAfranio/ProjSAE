@@ -16,7 +16,7 @@
 		echo "<script>location.href='../afirmativa/Afirmativa.php?cad=sucesso';</script>";
 	}
 
-	if($acao = "deletar"){
+	if($acao == "deletar"){
 
 		$idAfirmativa = $_POST["idAfirmativa"];
 		$afirmativaModel->excluir($idAfirmativa);

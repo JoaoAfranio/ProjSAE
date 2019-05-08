@@ -42,6 +42,17 @@
 			return $res;
 		}
 
+		public function listarID($idQuestao){
+            
+            $listarUm = $this->bd->prepare("SELECT * from questao where idQuestao = :idQuestao");
+            $listarUm->bindParam(":idQuestao", $idQuestao, PDO::PARAM_INT);
+            $listarUm->execute();
+
+            $res = $listarUm->fetch(PDO::FETCH_ASSOC);
+            return $res;
+         }
+
+
 	}
 
 

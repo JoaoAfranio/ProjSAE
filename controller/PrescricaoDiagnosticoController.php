@@ -19,7 +19,7 @@
 		
 	}
 
-	if($acao = "deletar"){
+	if($acao == "deletar"){
 
 		$prescricaoDiagnosticoModel->excluir($idDiagnostico, $idPrescricao);
 
