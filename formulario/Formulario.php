@@ -4,9 +4,18 @@ include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/FormularioModel.php";
    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AvaliacaoModel.php";
    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/FormularioAvaliacaoModel.php";
+   require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AvaliacaoQuestaoModel.php";
+   require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AfirmativaModel.php";
+   require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/AfirmativaQuestaoModel.php";
+   require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/QuestaoModel.php";
 
+
+
+   $afirmativa = new AfirmativaModel();
+   $afirmativaQuestao = new AfirmativaQuestaoModel();
    $formulario = new FormularioModel();
    $avaliacao = new AvaliacaoModel();
+   $questao = new  QuestaoModel();
 
 ?>
 <body

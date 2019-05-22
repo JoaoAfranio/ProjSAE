@@ -1,9 +1,3 @@
-<?php
-    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/FormularioModel.php";
-
-    $afirmativa = new FormularioModel();
-
-?>
 
 
 <div class="card">

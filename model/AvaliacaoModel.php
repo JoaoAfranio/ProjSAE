@@ -41,7 +41,8 @@
 
             $res = $listarUm->fetch(PDO::FETCH_ASSOC);
             return $res;
-         }
+		 }
+		 
 
 
 	}
