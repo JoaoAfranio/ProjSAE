@@ -35,7 +35,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
 >
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
-    <?php require '../template/menu.php'; ?>
+    <?php require '../template/menuADM.php'; ?>
       <!-- partial -->
       <div class="main-panel">        
         <div class="content-wrapper">

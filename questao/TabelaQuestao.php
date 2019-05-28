@@ -155,8 +155,12 @@
                             </td>
                             <td>
                                 <form class="forms-sample" method="post" action="../controller/QuestaoController.php?acao=deletar">
-                                    <input type="hidden" name="idQuestao" value="<?php echo $quest['IdQuestao']?>">
-                                    <button type="submit" class="btn btn-primary mr-2">Deletar</button>
+                                    <input type="hidden" name="idQuestao" value="<?php echo $quest['IdQuestao']?>">                                   
+                                    <button type="submit" 
+                                    <?php if(count($resAfirmativa) > 0){
+                                        echo "disabled";
+                                    }?>
+                                    class="btn btn-primary mr-2">Deletar</button>
                                 </form>
                             </td>
                         </tr>

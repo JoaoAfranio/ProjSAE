@@ -55,7 +55,11 @@
                             <td>
                                 <form class="forms-sample" method="post" action="../controller/AvaliacaoController.php?acao=deletar">
                                     <input type="hidden" name="idAvaliacao" value="<?php echo $aval['IdAvaliacao']?>">
-                                    <button type="submit" class="btn btn-primary mr-2">Deletar</button>
+                                    <button type="submit" 
+                                    <?php if(count($resAvalQuestao) > 0){
+                                        echo "disabled";
+                                    }?>
+                                    class="btn btn-primary mr-2">Deletar</button>
                                 </form>
                             </td>
                         </tr>

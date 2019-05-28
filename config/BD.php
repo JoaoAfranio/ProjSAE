@@ -8,7 +8,7 @@
 
 			if(isset($conexao) == false){
 
-				$conexao = new PDO("mysql:dbname=sae;host=localhost","root","",array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				$conexao = new PDO("mysql:dbname=u989534060_sae;host=localhost","root","",array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 				$conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			}

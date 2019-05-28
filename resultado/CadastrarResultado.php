@@ -2,7 +2,6 @@
     require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/ResultadoModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/DiagnosticoModel.php";
 
-    $questao = new ResultadoModel();
     $diagnostico = new DiagnosticoModel();
     $resDiagnostico = $diagnostico->listarTodos();
 ?>

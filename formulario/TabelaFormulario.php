@@ -49,7 +49,6 @@
                                 </div>
                             </div>
 
-                            <!-- Fim Modal -->
                             <td>
 
                                     <?php   
@@ -78,7 +77,11 @@
                             <td>
                                 <form class="forms-sample" method="post" action="../controller/FormularioController.php?acao=deletar">
                                     <input type="hidden" name="idFormulario" value="<?php  echo $form['IdFormulario']?>">
-                                    <button type="submit" class="btn btn-primary mr-2">Deletar</button>
+                                    <button type="submit" 
+                                    <?php if(count($resFormAvaliacao) > 0){
+                                        echo "disabled";
+                                    }?>
+                                    class="btn btn-primary mr-2">Deletar</button>
                                 </form>
                             </td>
                         </tr>
