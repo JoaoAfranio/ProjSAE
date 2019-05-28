@@ -61,8 +61,32 @@
             $listarPeloNome = $this->bd->query("SELECT * from paciente WHERE nome like '%$nome%' GROUP BY nome");
             $res = $listarPeloNome->fetchAll(PDO::FETCH_ASSOC);
             return $res;
+         }
+
+         public function listarInfosPaciente($idPaciente){
+            $listarInfosPaciente = $this->bd->prepare("SELECT pac.IdPaciente, pac.Nome, pac.CodigoPaciente, tpPac.IdTipoPaciente, tpPac.Descricao, ui.NomeUnidade
+                                                       FROM Paciente as pac INNER JOIN tipopaciente as tpPac on tpPac.IdTipoPaciente = pac.IdTipoPaciente
+                                                                            INNER JOIN unidadeinternacao as ui on ui.IdUnidadeInternacao = pac.IdUnidadeInternacao
+                                                                            WHERE pac.IdPaciente = :idPaciente");
+            $listarInfosPaciente->bindParam(":idPaciente", $idPaciente, PDO::PARAM_INT);
+            $listarInfosPaciente->execute();
+
+            $res = $listarInfosPaciente->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+
+         }
 
 
+         public function listarInfoPeloIdQuestionario($idQuestionario){
+            $listarInfoPeloIdQuestionario = $this->bd->prepare("SELECT * FROM paciente as pac INNER JOIN questionario as quest on quest.IdPaciente = pac.IdPaciente 
+                                                                  INNER JOIN tipopaciente as tp on tp.IdTipoPaciente = pac.IdTipoPaciente
+                                                                  INNER JOIN unidadeinternacao as ui on ui.IdUnidadeInternacao = pac.IdUnidadeInternacao
+                                                                  WHERE quest.IdQuestionario = :idQuestionario LIMIT 1");
+            $listarInfoPeloIdQuestionario->bindParam(":idQuestionario", $idQuestionario, PDO::PARAM_INT);
+            $listarInfoPeloIdQuestionario->execute();
+
+            $res = $listarInfoPeloIdQuestionario->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
             
          }
 	}

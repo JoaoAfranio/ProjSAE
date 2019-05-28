@@ -41,6 +41,17 @@
 			return $res;
 		 }
 
+		 public function listarTodasQuestoesAplicacao($idAplicacao){
+			
+			$listarTodasQuestoesAplicacao = $this->bd->query("SELECT * FROM aplicacao 
+			INNER JOIN avaliacao ON avaliacao.IdAvaliacao = aplicacao.IdAvaliacao 
+			INNER JOIN avaliacaoquestao ON avaliacaoquestao.IdAvaliacao = avaliacao.IdAvaliacao 
+			INNER JOIN questao ON questao.IdQuestao = avaliacaoquestao.IdQuestao WHERE aplicacao.IdAplicacao = " . $idAplicacao);
+			
+			$res = $listarTodasQuestoesAplicacao->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		 }
+
 		 public function listarTudoPorIdFormulario($idFormulario){
 			
 			$listarTudoPorIdFormulario = $this->bd->query("SELECT aplicacao.IdAplicacao, avaliacao.IdAvaliacao, questao.IdQuestao, questao.Descricao,questao.IdTipoQuestao,questao.PossuiOutro 
@@ -53,7 +64,6 @@
 			$res = $listarTudoPorIdFormulario->fetchAll(PDO::FETCH_ASSOC);
 			return $res;
 		 }
-
 
 	}
 

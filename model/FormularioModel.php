@@ -41,8 +41,16 @@
 
             $res = $listarUm->fetch(PDO::FETCH_ASSOC);
             return $res;
-         }
-
+		 }
+		 
+		 public function listarTodasAvaliacoes($idFormulario){
+			$listarTodasAvaliacoes = $this->bd->query("SELECT * FROM formulario INNER JOIN aplicacao ON aplicacao.IdFormulario = formulario.IdFormulario 
+										INNER JOIN avaliacao on avaliacao.IdAvaliacao = aplicacao.IdAvaliacao
+										INNER JOIN avaliacaoquestao on avaliacaoquestao.IdAvaliacao = avaliacao.IdAvaliacao 
+										WHERE formulario.IdFormulario = " . $idFormulario . "  GROUP BY avaliacao.Descricao");
+			$res = $listarTodasAvaliacoes->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
 
 	}
 

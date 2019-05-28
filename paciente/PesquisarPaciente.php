@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
+    include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
 
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
     require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/UnidadeInternacaoModel.php";
 
     $unidadeInternacao = new UnidadeInternacaoModel();
@@ -78,7 +78,7 @@
                             }
                             ?>
                             <p class="page-description mt-1 w-75 text-muted">Unidade de Internação: <?php echo $nomeUnidade?></p>
-                            <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../tables/pacientePage.php?nome=<?php echo $pessoa['Nome'];?>"><i class="mdi mdi-account-circle menu-icon"></i> Detalhar Paciente</a>
+                            <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../paciente/Paciente.php?idPaciente=<?php echo $pessoa['IdPaciente'];?>"><i class="mdi mdi-account-circle menu-icon"></i> Detalhar Paciente</a>
                             <a target="_blank" class="mBottom10 buttonPesqPaciente btn btn-primary" href="pacientepdf.php?idPaciente=<?php echo $pessoa['IdPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
                           </div>
                           <div class="col-6">

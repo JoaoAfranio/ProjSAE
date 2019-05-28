@@ -45,7 +45,20 @@
             return $res;
          }
 
+		 public function listarTodasRespostasUnicasQuestionario($idQuestionario){
+            
+            $listarTodasRespostasUnicasQuestionario = $this->bd->prepare("SELECT res.IdAvaliacao, questao.Descricao, afirmativa.Descricao as descricaoAfirmativa
+											FROM resposta as res INNER JOIN questionario as quest on res.IdQuestionario = quest.IdQuestionario
+											INNER JOIN respostaunica as rUnica on rUnica.IdResposta = res.IdResposta 
+											INNER JOIN Questao  on questao.IdQuestao = rUnica.IdQuestao 
+											INNER JOIN Afirmativa on afirmativa.IdAfirmativa = rUnica.IdAfirmativa
+											WHERE quest.IdQuestionario = :idQuestionario");
+            $listarTodasRespostasUnicasQuestionario->bindParam(":idQuestionario", $idQuestionario, PDO::PARAM_INT);
+            $listarTodasRespostasUnicasQuestionario->execute();
 
+            $res = $listarTodasRespostasUnicasQuestionario->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+         }
 	}
 
 

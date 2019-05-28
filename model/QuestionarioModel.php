@@ -59,6 +59,26 @@
         return $res;
         }
 
+        public function listarQuestFormFunc($idPaciente){
+            //INNER JOIN Questionario, Formulario e Funcionario
+            $listarQuestFormFunc = $this->bd->query("SELECT IdQuestionario, form.IdFormulario, IdPaciente, DATE_FORMAT(DataRealizado, '%d/%m/%Y') AS dataFormatada, Descricao, func.Nome
+                                        FROM Questionario 
+                                        INNER JOIN formulario as form on form.IdFormulario = questionario.IdFormulario 
+                                        INNER JOIN funcionario as func on func.IdFuncionario = questionario.IdFuncionario
+                                        WHERE IdPaciente = '$idPaciente'");
+            $res = $listarQuestFormFunc->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        public function listarTodasAvaliacoes($idQuestionario){
+            $listarTodasAvaliacoes = $this->bd->query("SELECT avaliacao.IdAvaliacao, avaliacao.Descricao from aplicacao INNER JOIN formulario on formulario.IdFormulario = aplicacao.IdFormulario
+                                                    INNER JOIN avaliacao on avaliacao.IdAvaliacao = aplicacao.IdAvaliacao
+                                                    INNER JOIN questionario on questionario.IdFormulario = formulario.IdFormulario
+                                                    WHERE questionario.IdQuestionario = '$idQuestionario'");
+            $res = $listarTodasAvaliacoes->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
 
 	}
 
