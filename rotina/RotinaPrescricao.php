@@ -2,6 +2,20 @@
 <html lang="pt-br">
 <?php 
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteDiagnosticoModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/DiagnosticoModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PrescricaoModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PrescricaoDiagnosticoModel.php";
+
+    $idQuestionario = $_GET["idQuestionario"];
+
+    $pacienteDiagnosticoModel = new PacienteDiagnosticoModel();
+    $diagnosticoModel = new DiagnosticoModel();
+    $prescricaoModel = new PrescricaoModel();
+    $prescricaoDiagnosticoModel = new PrescricaoDiagnosticoModel();
+
+    $resQuestionarioDiagnosticos = $pacienteDiagnosticoModel->listarIdQuestionarioDiagPresc($idQuestionario);
+
 ?>
 
 
@@ -18,7 +32,8 @@
                       <h4>Paciente: <small class="text-muted">Nome do paciente</small> </h4>
                       <h5>Código do Paciente: <small class="text-muted">Codigo do paciente</small> </h5>
                       <br>
-                      <form id="form-rotina" action="RotinaResultado.php">
+                      <form id="form-rotina" method="POST" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarPrescricao">
+                      <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario;?>">
                         <div role="application" class="wizard clearfix" id="steps-uid-0"><div class="steps clearfix">
                             <ul role="tablist">
                                 <li role="tab" class="first done" aria-disabled="false" aria-selected="true">
@@ -43,14 +58,33 @@
                         <div class="content clearfix">
                         <h3 id="steps-uid-0-h-1" tabindex="-1" class="title current">Prescrição</h3>
                           <section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body current" style="left: 0px;" aria-hidden="false">
-                              <div class="add-items d-flex">
-                                  <input type="text" class="inputPrescricao typehead form-control prescricao-list-input" placeholder="Insira uma prescrição">
-                                  <button class="add btn btn-primary font-weight-bold prescricao-list-add-btn">Adicionar</button>
-                                </div>
-                                <div class="list-wrapper">
-                                  <ul class="d-flex flex-column-reverse prescricao-list">
-                                  </ul>
-                                </div>
+                          <?php 
+                                  // Busco todos os diagnosticos do questionario
+                                  foreach($resQuestionarioDiagnosticos as $diagnostico){
+                          ?>
+                                  <input type="hidden" name="diagnosticos" value="
+                                  <?php 
+                                    $idDiagnosticos .= $diagnostico['IdDiagnostico'] . ";";
+                                    echo $idDiagnosticos;
+                                  
+                                  ?>">
+                          <?php
+                                    // Busco a descricao do diagnostico atraves do ID
+                                    $resDiagnostico = $diagnosticoModel->listarID($diagnostico["IdDiagnostico"]);  
+                                    ?>
+                                    <p><?php echo $resDiagnostico['Descricao']?></p>
+                                    <select multiple name="diagnostico<?php echo $diagnostico["IdDiagnostico"] ?>[]">               
+                                    <?php
+                                    // Busco todas as prescricoes para aquele diagnostico                        
+                                    $resPrescricao = $prescricaoDiagnosticoModel->listarPorIdDiagnostico($resDiagnostico['IdDiagnostico']);
+                                    foreach($resPrescricao as $prescricao){
+                                      // Busco a descricao da prescricao atraves do ID
+                                      $resPrescricao = $prescricaoModel->listarID($prescricao["IdPrescricao"]);  
+                                    ?>
+                                    <option value="<?php echo $prescricao['IdPrescricao']; ?>"><?php echo $resPrescricao["Descricao"];?></option>
+                                    <?php } ?>
+                                    </select>
+                                  <?php } ?>
                           </section>
                         </div>
                         <div class="actions clearfix">

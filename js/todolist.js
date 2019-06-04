@@ -39,7 +39,17 @@
       var item = $(this).prevAll('.diagnostico-list-input').val();
 
       if (item) {
-        DiagnosticoListItem.append("<li><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='remove mdi mdi-close-circle-outline'></i></li>");
+        DiagnosticoListItem.append("<li>" + 
+                                      "<div class='form-check'>" +
+                                        "<label class='form-check-label'>" +
+                                          "<input class='checkbox' type='checkbox'/>" + item + 
+                                          "<i class='input-helper'></i>" +
+                                        "</label>" +
+                                      "</div>" +
+                                      "<option style='visibility: hidden'>" + item + "</option>" + 
+                                      "<i class='remove mdi mdi-close-circle-outline'></i>" +
+                                    "</li>" 
+                                    );
         DiagnosticoListInput.val("");
       }
 

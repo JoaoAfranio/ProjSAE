@@ -49,7 +49,7 @@
          }
 
          public function listarUltimo($codigoPaciente){
-            $listarUltimo = $this->bd->prepare("SELECT * FROM `paciente` WHERE CodigoPaciente = :codigoPaciente");
+            $listarUltimo = $this->bd->prepare("SELECT * FROM paciente WHERE CodigoPaciente = :codigoPaciente");
             $listarUltimo->bindParam(":codigoPaciente", $codigoPaciente);
             $listarUltimo->execute();
 
@@ -64,7 +64,7 @@
          }
 
          public function listarInfosPaciente($idPaciente){
-            $listarInfosPaciente = $this->bd->prepare("SELECT pac.IdPaciente, pac.Nome, pac.CodigoPaciente, tpPac.IdTipoPaciente, tpPac.Descricao, ui.NomeUnidade
+            $listarInfosPaciente = $this->bd->prepare("SELECT pac.IdPaciente, pac.Nome, pac.CodigoPaciente, tpPac.IdTipoPaciente, tpPac.Descricao, ui.NomeUnidade, ui.IdUnidadeinternacao
                                                        FROM Paciente as pac INNER JOIN tipopaciente as tpPac on tpPac.IdTipoPaciente = pac.IdTipoPaciente
                                                                             INNER JOIN unidadeinternacao as ui on ui.IdUnidadeInternacao = pac.IdUnidadeInternacao
                                                                             WHERE pac.IdPaciente = :idPaciente");

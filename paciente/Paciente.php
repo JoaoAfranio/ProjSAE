@@ -58,7 +58,7 @@
               <h5>Unidade de internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
               <br>
               <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../examefisico/ExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>&tipoPaciente=<?php echo $paciente['IdTipoPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Realizar Exame Físico</a>
-              <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../apps/realizarRotina.php?nome=<?php echo $paciente['Nome'];?>">
+              <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>">
               <i class="mdi mdi-playlist-check menu-icon"></i> Realizar Rotina</a>
               <a target="_blank" class="mBottom10 buttonPesqPaciente btn btn-primary" href="../samples/pacientepdf.php?idPaciente=<?php echo $paciente['IdPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
               <h4 style="margin-top: 20px;">Histórico do paciente</h4>

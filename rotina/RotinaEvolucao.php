@@ -2,6 +2,8 @@
 <html lang="pt-br">
 <?php 
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
+
+    $idQuestionario = $_GET["idQuestionario"];
 ?>
 
 
@@ -18,7 +20,8 @@
                       <h4>Paciente: <small class="text-muted">Nome do paciente</small> </h4>
                       <h5>Código do Paciente: <small class="text-muted">Codigo do paciente</small> </h5>
                       <br>
-                      <form id="form-rotina" action="#">
+                      <form id="form-rotina" method="post" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarEvolucao">
+                      <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario;?>">
                         <div role="application" class="wizard clearfix" id="steps-uid-0"><div class="steps clearfix">
                             <ul role="tablist">
                                 <li role="tab" class="first done" aria-disabled="false" aria-selected="true">
@@ -45,7 +48,7 @@
                           <section id="steps-uid-0-p-3" role="tabpanel" aria-labelledby="steps-uid-0-h-2" class="body current" style="left: 0px;" aria-hidden="false">
                             <h3>Evolução</h3>
                             <div class="form-group">
-                              <textarea class="form-control" rows="10"></textarea>
+                              <textarea name="evolucao" class="form-control" rows="10"></textarea>
                             </div>
                           </section>
                         </div>

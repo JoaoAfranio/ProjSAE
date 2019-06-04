@@ -61,6 +61,12 @@
 			 return $res;
 		 }
 
+		public function listarTodosPorUnidade($idUnidadeInternacao){
+			$listar = $this->bd->query("SELECT * from diagnostico WHERE IdUnidadeInternacao = " . $idUnidadeInternacao);
+			$res = $listar->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
+
 
 	}
 

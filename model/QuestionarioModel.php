@@ -36,7 +36,7 @@
         $res = $listar->fetchAll(PDO::FETCH_ASSOC);
         return $res;
         }
-
+        
 		public function listarID($idQuestionario){
             
             $listarUm = $this->bd->prepare("SELECT * from Questionario where idQuestionario = :idQuestionario");

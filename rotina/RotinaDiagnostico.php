@@ -2,8 +2,23 @@
 <html lang="pt-br">
 <?php 
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
-?>
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/DiagnosticoModel.php";
 
+
+    if (isset($_GET["idPaciente"])) {
+      $idPaciente = $_GET["idPaciente"];
+    }else{
+        echo "<script>location.href='../paciente/PesquisarPaciente.php';</script>";
+    }
+
+    $pacienteModel = new PacienteModel();
+    $resPaciente = $pacienteModel->listarInfosPaciente($idPaciente);
+    
+    foreach($resPaciente as $paciente){
+    $diagnosticoModel = new DiagnosticoModel();
+    $resDiagnostico = $diagnosticoModel->listarTodosPorUnidade($paciente["IdUnidadeinternacao"]);
+?>
 
 <body>
   <div class="container-scroller">
@@ -15,10 +30,12 @@
                 <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
-                      <h4>Paciente: <small class="text-muted">Nome do paciente</small> </h4>
-                      <h5>Código do Paciente: <small class="text-muted">Codigo do paciente</small> </h5>
+                      <h4>Paciente: <small class="text-muted"><?php echo $paciente['Nome'];?></small> </h4>
+                      <h5>Código do Paciente: <small class="text-muted"><?php echo $paciente['CodigoPaciente'];?></small> </h5>
+                      <h5>Unidade de Internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
                       <br>
-                      <form id="form-rotina" action="RotinaPrescricao.php">
+                      <form id="form-rotina" method="post" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarDiagnostico">
+                      <input type="hidden" name="idPaciente" value="<?php echo $idPaciente?>";>
                         <div role="application" class="wizard clearfix" id="steps-uid-0"><div class="steps clearfix">
                             <ul role="tablist">
                                 <li role="tab" class="first current" aria-disabled="false" aria-selected="true">
@@ -42,17 +59,12 @@
                         </div>
                         <div class="content clearfix">
                           <h3 id="steps-uid-0-h-0" tabindex="-1" class="title current">Diagnóstico</h3>
-                          <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false" style="left: 0px;">
-                              <div id="the-basics" class="add-items d-flex">
-                                <input type="text" class="inputDiagnostico typehead form-control diagnostico-list-input" placeholder="Insira um diagnóstico">
-                                <button class="add btn btn-primary font-weight-bold diagnostico-list-add-btn">Adicionar</button>
-                              </div>
-                              <div class="list-wrapper">
-                                <ul class="d-flex flex-column-reverse diagnostico-list">
-                                  <li>
-                                  </li>
-                                </ul>
-                              </div>
+                          <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false" style="left: 0px;overflow-y:auto">
+                            <select name="diagnosticos[]" multiple>
+                            <?php foreach($resDiagnostico as $diagnostico){ ?>
+                              <option value="<?php echo $diagnostico["IdDiagnostico"];?>"> <?php echo $diagnostico["Descricao"];?> </option>
+                            <?php } ?>
+                            </select>
                           </section>
                         </div>
                           <div class="actions clearfix">
@@ -97,6 +109,7 @@
   <!-- End custom js for this page-->
 </body>
 
+<?php } ?>
 <script>
   $(document).ready(function(){
     $(".inputDiagnostico").typeahead({

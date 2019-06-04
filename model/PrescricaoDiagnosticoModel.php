@@ -35,6 +35,12 @@
 		 	return $res;
 		 }
 
+		 public function listarPorIdDiagnostico($idDiagnostico){
+			$listarPorIdDiagnostico = $this->bd->query("SELECT * from diagnosticoprescricao WHERE IdDiagnostico = " . $idDiagnostico);
+			$res = $listarPorIdDiagnostico->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		 }
+
 
 	}
 
