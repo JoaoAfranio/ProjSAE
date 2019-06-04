@@ -63,7 +63,17 @@
             $alterarEvolucao->bindParam(":evolucao", $evolucao);
             $alterarEvolucao->execute();
     
-        }
+		}
+		
+		public function listarTodosDiagnosticos($idPaciente){
+			$listarTodosDiagnosticos = $this->bd->query("SELECT diag.Descricao FROM diagnostico as diag 
+														INNER JOIN pacientediagnostico as pacDiag on pacDiag.IdDiagnostico = diag.IdDiagnostico
+														INNER JOIN questionariodiagpresc as qDiagPres on qDiagPres.idQuestionarioDiagPresc = pacDiag.idQuestionarioDiagPresc
+														INNER JOIN Paciente as pac on qDiagPRes.IdPaciente = pac.IdPaciente
+														WHERE pac.IdPaciente = " . $idPaciente);
+			$res = $listarTodosDiagnosticos->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
 
 		 
 

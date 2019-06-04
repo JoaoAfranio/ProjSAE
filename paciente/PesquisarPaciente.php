@@ -5,11 +5,11 @@
 
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/UnidadeInternacaoModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/QuestionarioDiagPrescModel.php";
 
     $unidadeInternacao = new UnidadeInternacaoModel();
-    
-
     $pacienteModel = new PacienteModel();
+    $questionarioDiagPrescModel = new QuestionarioDiagPrescModel();
 
   if (isset($_GET["nome"])) {
     $nomePesq = $_GET["nome"];
@@ -85,17 +85,11 @@
                             <p class="d-block h4 mb-0" href="#">Diagnósticos:</p>
                             <ul class="list-arrow">
                             <?php 
-                            $nome = $pessoa['Nome'];
-                            $queryDiagnostico = "SELECT diag.Descricao FROM diagnostico as diag 
-                                                INNER JOIN pacientediagnostico as pacDiag on pacDiag.IdDiagnostico = diag.IdDiagnostico
-                                                INNER JOIN questionariodiagpres as qDiagPres on qDiagPres.idQuestionarioDiagPresc = pacDiag.idQuestionarioDiagPresc
-                                                INNER JOIN Paciente as pac on qDiagPRes.IdPaciente = pac.IdPaciente
-                                                WHERE pac.Nome = '$nome' LIMIT 3";
 
+                            $resDiagnostico = $questionarioDiagPrescModel->listarTodosDiagnosticos($pessoa['IdPaciente']);
 
-                            $resDiagnostico = mysqli_query($con, $queryDiagnostico);
-
-                            foreach($resDiagnostico as $diagnostico){?>
+                            foreach($resDiagnostico as $diagnostico){;?>
+                              
                               <li class="page-description mt-1 w-75 text-muted"><?php echo $diagnostico['Descricao'];?></li>
                             <?php }?>
                             </ul>

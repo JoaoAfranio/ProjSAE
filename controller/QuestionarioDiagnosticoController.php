@@ -27,7 +27,6 @@
         $questionarioDiagPrescModel->inserir($dataRealizado, $evolucao, $idPaciente, $idFuncionario);
         
         $questionario = $questionarioDiagPrescModel->listarUltimo($idPaciente);
-        echo var_dump($questionario);
         $idQuestionario = $questionario["max(IdQuestionarioDiagPresc)"];
 
         foreach($_POST["diagnosticos"] as $diagnostico){
