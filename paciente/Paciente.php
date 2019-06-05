@@ -3,6 +3,7 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/QuestionarioModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/QuestionarioDiagPrescModel.php";
 
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
     
@@ -17,6 +18,9 @@
 
     $questionarioModel = new QuestionarioModel();
     $resQuestionario = $questionarioModel->listarQuestFormFunc($idPaciente);
+    
+    $questionarioDiagPrescModel = new QuestionarioDiagPrescModel();
+    $resQuestionarioDiagPresc = $questionarioDiagPrescModel->listarTodosPorPaciente($idPaciente);
     
 
 ?>
@@ -60,7 +64,7 @@
               <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../examefisico/ExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>&tipoPaciente=<?php echo $paciente['IdTipoPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Realizar Exame Físico</a>
               <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>">
               <i class="mdi mdi-playlist-check menu-icon"></i> Realizar Rotina</a>
-              <a target="_blank" class="mBottom10 buttonPesqPaciente btn btn-primary" href="../samples/pacientepdf.php?idPaciente=<?php echo $paciente['IdPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
+              <a data-toggle="modal" data-target="#exampleModal-2" class="mBottom10 buttonPesqPaciente btn btn-primary"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
               <h4 style="margin-top: 20px;">Histórico do paciente</h4>
               <div class="row">
                 <div class="col-12">
@@ -131,5 +135,40 @@
   <script src="../js/avgrund.js"></script>
   <!-- End custom js for this page-->
 </body>
+
+
+<div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel-2">Gerar PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>Escolha o exame físico</label><br>
+        <select>
+        <?php 
+        foreach($resQuestionario as $questionario){?>
+        <option><?php echo $questionario['dataFormatada'];?></option>
+        <?php } ?>
+        </select>
+        <br><br>
+        <label>Escolha o formulário de prescrição.</label><br>
+        <select>
+        <?php 
+        foreach($resQuestionarioDiagPresc as $questionarioDiagPresc){?>
+        <option><?php echo $questionarioDiagPresc['dataFormatada'];?></option>
+        <?php } ?>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success">Gerar</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </html>

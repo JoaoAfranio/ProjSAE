@@ -79,8 +79,4 @@
         $questionarioDiagPrescModel->alterarEvolucao($idQuestionarioDiagPresc, $evolucao);
 	}
 
-	
-
-
-
 ?>

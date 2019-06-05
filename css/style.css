@@ -11007,7 +11007,7 @@ fieldset:disabled a {
 }
 
 .btn-primary, .wizard > .actions a {
-  color: #fff;
+  color: #fff !important;
   background-color: #0b81d6;
   border-color: #0b81d6;
 }

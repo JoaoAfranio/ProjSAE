@@ -75,7 +75,15 @@
 			return $res;
 		}
 
-		 
+		public function listarTodosPorPaciente($idPaciente){
+			$listarTodosPorPaciente = $this->bd->prepare("SELECT *, DATE_FORMAT(DataRealizado, '%d/%m/%Y') AS dataFormatada from QuestionarioDiagPresc where idPaciente = :idPaciente");
+            $listarTodosPorPaciente->bindParam(":idPaciente", $idPaciente, PDO::PARAM_INT);
+			$listarTodosPorPaciente->execute();
+			
+            $res = $listarTodosPorPaciente->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+		}
+
 
 
 
