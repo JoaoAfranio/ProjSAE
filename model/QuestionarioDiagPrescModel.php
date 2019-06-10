@@ -84,7 +84,24 @@
             return $res;
 		}
 
+				
+		public function listarTodosDiagnosticosIdQuestionario($idQuestionarioDiagPresc){
+			$listarTodosDiagnosticosIdQuestionario = $this->bd->query("SELECT * from questionariodiagpresc
+														INNER JOIN pacientediagnostico on pacientediagnostico.idQuestionarioDiagPresc = questionariodiagpresc.idQuestionarioDiagPresc
+														INNER JOIN diagnostico on diagnostico.IdDiagnostico = pacientediagnostico.IdDiagnostico
+														WHERE questionariodiagpresc.IdQuestionarioDiagPresc = " . $idQuestionarioDiagPresc);
+			$res = $listarTodosDiagnosticosIdQuestionario->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
 
+		public function listarTodasPrescricoesIdQuestionario($idQuestionarioDiagPresc){
+			$listarTodasPrescricoesIdQuestionario = $this->bd->query("SELECT * from questionariodiagpresc
+														INNER JOIN pacienteprescricao on pacienteprescricao.idQuestionarioDiagPresc = questionariodiagpresc.idQuestionarioDiagPresc
+														INNER JOIN prescricao on prescricao.IdPrescricao = pacienteprescricao.IdPrescricao
+														WHERE questionariodiagpresc.IdQuestionarioDiagPresc = " . $idQuestionarioDiagPresc);
+			$res = $listarTodasPrescricoesIdQuestionario->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+		}
 
 
 	}

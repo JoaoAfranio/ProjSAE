@@ -147,26 +147,28 @@
         </button>
       </div>
       <div class="modal-body">
+      <form method="post" action="RelatorioPaciente.php">
         <label>Escolha o exame físico</label><br>
-        <select>
+        <select name="idQuestionario">
         <?php 
         foreach($resQuestionario as $questionario){?>
-        <option><?php echo $questionario['dataFormatada'];?></option>
+        <option value="<?php echo $questionario['IdQuestionario'];?>"><?php echo $questionario['dataFormatada'];?></option>
         <?php } ?>
         </select>
         <br><br>
         <label>Escolha o formulário de prescrição.</label><br>
-        <select>
+        <select name="idQuestionarioDiagPresc">
         <?php 
         foreach($resQuestionarioDiagPresc as $questionarioDiagPresc){?>
-        <option><?php echo $questionarioDiagPresc['dataFormatada'];?></option>
+        <option value="<?php echo $questionarioDiagPresc['IdQuestionarioDiagPresc'];?>"><?php echo $questionarioDiagPresc['dataFormatada'];?></option>
         <?php } ?>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success">Gerar</button>
+        <button type="submit" class="btn btn-success">Gerar</button>
         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
