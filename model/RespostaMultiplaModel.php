@@ -12,8 +12,24 @@
 		 	$this->bd = BancoDados::obterConexao();
 
          }
+
          
-		 public function listarTodasQuestoesMultiplas($idQuestionario){
+         public function inserir($idResposta){
+            $insercao = $this->bd->prepare("INSERT INTO respostamultipla(IdResposta) VALUES (:idResposta)");
+            $insercao->bindParam(":idResposta", $idResposta);
+            $insercao->execute();
+
+         }
+
+         public function inserirRespostasMultipla($idResposta, $idAfirmativa, $idQuestao){
+            $insercaoRespostaMultipla = $this->bd->prepare("INSERT INTO respostamultiplaafirmativa (IdResposta, IdAfirmativa, IdQuestao) VALUES (:idResposta, :idAfirmativa, :idQuestao)"); 
+            $insercaoRespostaMultipla->bindParam(":idAfirmativa", $idAfirmativa);
+            $insercaoRespostaMultipla->bindParam(":idQuestao", $idQuestao);
+            $insercaoRespostaMultipla->bindParam(":idResposta", $idResposta);
+            $insercaoRespostaMultipla->execute();
+         }
+         
+		   public function listarTodasQuestoesMultiplas($idQuestionario){
             
             $listarTodasQuestoesMultiplas = $this->bd->prepare("SELECT res.IdAvaliacao, questao.IdQuestao, questao.Descricao, afirmativa.Descricao as descricaoAfirmativa
                                             FROM resposta as res INNER JOIN questionario as quest on res.IdQuestionario = quest.IdQuestionario

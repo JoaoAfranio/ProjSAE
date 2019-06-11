@@ -5,8 +5,10 @@
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaAbertaModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaUnicaModel.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaMultiplaModel.php";
 
     $respostaModel = new RespostaModel();
+    $respostaMultiplaModel = new RespostaMultiplaModel();
     $questionarioModel = new QuestionarioModel();
     $respostaAbertaModel = new RespostaAbertaModel();
     $respostaUnicaModel = new RespostaUnicaModel();
@@ -68,9 +70,13 @@
 
         foreach($_POST as $nomeQuestao => $respostaQuestao)
         {
+            
+            
             /* Aqui se declara variável dinamicamente; pode ser um array de variáveis com conteúdo do array post onde cada posição contém o nome do campo do formulário e o valor será o valor do campo do formulário, ou criar várias variáveis isoladas como abaixo. */
             $temp = $nomeQuestao.";".$respostaQuestao;
             
+
+
             $pieces = explode(";", $temp);
             $res = explode("\"", $temp);
         
@@ -81,64 +87,37 @@
             $idAvaliacao = $pieces[1];
             $idQuestao = $pieces[2];
             $idTipoQuestao = $pieces[3];
-            $respostaQuestao = $pieces[4];
-        
-            if($idTipoQuestao == 3){
-            echo $temp ."<br>";
-            }
-        
-            // echo "idAplicacao: " . $idAplicacao . "<br>"; // piece1
-            // echo "idAvaliacao: " . $idAvaliacao . "<br>"; // piece2
-            // echo "idQuestao: " . $idQuestao . "<br>"; // piece2
-            // echo "idTipoQuestao: " . $idTipoQuestao . "<br>"; // piece2
-            // echo "Resposta: " . $respostaQuestao . "<br>";
-        
+            
             //Crio Resposta
             $respostaModel->inserir($idAplicacao,$idAvaliacao,$idQuestao,$idQuestionario);
-        
-            // Seleciono a ultima resposta com os valores de $idAplicacao,$idAvaliacao,$idQuestao
+
+            //Seleciono a ultima resposta com os valores de $idAplicacao,$idAvaliacao,$idQuestao
             $resposta = $respostaModel->listarResposta($idAplicacao,$idAvaliacao,$idQuestao,$idQuestionario);
             $idResposta = $resposta['IdResposta'];
-        
-                if(($idTipoQuestao == 1) || ($idTipoQuestao == 4)){
-                //Questao Aberta
-                    if($respostaQuestao != ""){
-                        $respostaAbertaModel->inserir($respostaQuestao, $idResposta);
-                    }
-                }
-            
-                if(($idTipoQuestao == 2) || ($idTipoQuestao == 5)){
-                // Questao Fechada Escolha Unica
-                $respostaUnicaModel->inserir($idResposta, $respostaQuestao, $idQuestao);
-        
-                }
-        /*    
-                if($idTipoQuestao == 3){
+
+            if($idTipoQuestao == 3){
                 // Questao Fechada Multipla Escolha
-                $queryInsertRespostaMultipla = "INSERT INTO RespostaMultipla(IdResposta) VALUES ('$idResposta')";
-                $resInsertRespostaMultipla = mysqli_query($con, $queryInsertRespostaMultipla);
-        
-                $querySelectUltimaRespostaMultipla = "";
-                $resSelectUltimaRespostaMultipla = mysqli_query($con, $querySelectUltimaRespostaMultipla);
-        
-                    foreach($resSelectUltimaRespostaMultipla as $ultimaResMultipla){
-                        foreach($respostaAfirmativa as $resAfirmativa){ // desfazer o array de id de afirmativa
-                        $queryMultiplaAfirmativa = "INSERT INTO RespostaMultiplaAfirmativa(IdResposta,IdAfirmativa,IdQuestao)
-                                                    VALUES ('$idResposta', '$resAfirmativa', '$idQuestao')";
-                        $resSelectMultiplaAfirmativa = mysqli_query($con, $queryMultiplaAfirmativa);
-                        }
-                    }
+                $respostaMultiplaModel->inserir($idResposta);
+                foreach($respostaQuestao as $idAfirmativa){
+                    $respostaMultiplaModel->inserirRespostasMultipla($idResposta, $idAfirmativa, $idQuestao);
                 }
-            
-            
-                if($idTipoQuestao == 5){
-                //Questao afirmação/negação P.S: Acredito que seja questão afirmativa
-                queryInsertRespostaAfirmacaoNegacao = "";
-                resInsertRespostaAfirmacaoNegacao = "";
+            }
+
+            // Caso a resposta seja somente unica(aberta, afirmativa unica)
+            $respostaQuestao = $pieces[4];
+        
+            if(($idTipoQuestao == 1) || ($idTipoQuestao == 4)){
+            //Questao Aberta
+                if($respostaQuestao != ""){
+                    $respostaAbertaModel->inserir($respostaQuestao, $idResposta);
                 }
             }
         
-            */
+            if(($idTipoQuestao == 2) || ($idTipoQuestao == 5)){
+            // Questao Fechada Escolha Unica
+            $respostaUnicaModel->inserir($idResposta, $respostaQuestao, $idQuestao);
+    
+            }
         
         
         } // Fim Foreach POST

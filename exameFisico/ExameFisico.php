@@ -135,7 +135,7 @@
                             ?>
                             <div class="form-group">
                               <label for="selectAtividade"><?php echo $resQuestao['Descricao'];?></label>
-                              <select class="js-example-basic-multiple w-100" multiple="multiple" <?php echo "name=" . $avalQuest['IdAplicacao'] . ';' . $avalQuest['IdAvaliacao'] . ';' . $avalQuest['IdQuestao']  . ';' . $avalQuest['IdTipoQuestao']  . "";?>>
+                              <select class="js-example-basic-multiple w-100" multiple="multiple" <?php echo "name=" . $avalQuest['IdAplicacao'] . ';' . $avalQuest['IdAvaliacao'] . ';' . $avalQuest['IdQuestao']  . ';' . $avalQuest['IdTipoQuestao']  . "[]";?>>
                               <?php foreach($resAfirmativa as $afirm){
                               $resAfirmativaDescricao = $afirmativa->listarID($afirm['IdAfirmativa']); ?> 
                                 <option value="<?php echo $resAfirmativaDescricao['IdAfirmativa'];?>"><?php echo $resAfirmativaDescricao['Descricao'];?></option>
