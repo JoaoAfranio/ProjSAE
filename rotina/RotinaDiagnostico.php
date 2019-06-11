@@ -8,8 +8,6 @@
 
     if (isset($_GET["idPaciente"])) {
       $idPaciente = $_GET["idPaciente"];
-    }else{
-        echo "<script>location.href='../paciente/PesquisarPaciente.php';</script>";
     }
 
     $pacienteModel = new PacienteModel();

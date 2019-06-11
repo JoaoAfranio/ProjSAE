@@ -4,6 +4,10 @@
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
 
     $idQuestionario = $_GET["idQuestionario"];
+
+    if (isset($_GET["idPaciente"])) {
+      $idPaciente = $_GET["idPaciente"];
+    }
 ?>
 
 
@@ -22,6 +26,7 @@
                       <br>
                       <form id="form-rotina" method="post" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarEvolucao">
                       <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario;?>">
+                      <input type="hidden" name="idPaciente" value="<?php echo $idPaciente?>";>
                         <div role="application" class="wizard clearfix" id="steps-uid-0"><div class="steps clearfix">
                             <ul role="tablist">
                                 <li role="tab" class="first done" aria-disabled="false" aria-selected="true">

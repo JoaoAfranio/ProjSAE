@@ -33,7 +33,7 @@
             $pacienteDiagnosticoModel->inserir($diagnostico , $idQuestionario);
          }
 
-		 echo "<script>location.href='../rotina/RotinaPrescricao.php?idQuestionario=". $idQuestionario ."';</script>";
+		 echo "<script>location.href='../rotina/RotinaPrescricao.php?idQuestionario=". $idQuestionario ."&idPaciente=". $idPaciente ."';</script>";
 	}
 
 
@@ -41,6 +41,7 @@
         $diagnosticos  = ($_POST["diagnosticos"]);
         $idDiagnosticos = explode(";", $diagnosticos);
         $idQuestionarioDiagPresc = $_POST["idQuestionario"];
+        $idPaciente = $_POST["idPaciente"];
         
         foreach($idDiagnosticos as $diag){
             $idDiagnostico = trim($diag); 
@@ -51,13 +52,34 @@
             }  
         }
 
-        echo "<script>location.href='../rotina/RotinaResultado.php?idQuestionario=". $idQuestionarioDiagPresc ."';</script>";
+        echo "<script>location.href='../rotina/RotinaPrescricaoRot.php?idQuestionario=". $idQuestionarioDiagPresc ."&idPaciente=". $idPaciente ."';</script>";
+    }
+
+    if($acao == "cadastrarPrescricaoRot"){
+        $prescricoes  = ($_POST["prescricoes"]);
+        $idPrescricoes = explode(";", $prescricoes);
+        
+        $idQuestionarioDiagPresc = $_POST["idQuestionario"];
+        $idPaciente = $_POST["idPaciente"];
+
+        foreach($idPrescricoes as $presc){
+            $idPrescricao = trim($presc); 
+
+            if($presc != ""){
+                $rotina = $_POST["prescricao" . $idPrescricao];
+                $pacientePrescricaoModel->alterarRotina($idQuestionarioDiagPresc, $idPrescricao, $rotina);
+            }  
+        }
+
+        echo "<script>location.href='../rotina/RotinaResultado.php?idQuestionario=". $idQuestionarioDiagPresc ."&idPaciente=". $idPaciente ."';</script>";
     }
 
     if($acao == "cadastrarResultado"){
         $diagnosticos  = ($_POST["diagnosticos"]);
         $idDiagnosticos = explode(";", $diagnosticos);
+
         $idQuestionarioDiagPresc = $_POST["idQuestionario"];
+        $idPaciente = $_POST["idPaciente"];
         
         foreach($idDiagnosticos as $diag){
             $idDiagnostico = trim($diag); 
@@ -68,15 +90,18 @@
             }  
         }
 
-        echo "<script>location.href='../rotina/RotinaEvolucao.php?idQuestionario=". $idQuestionarioDiagPresc ."';</script>";
+        echo "<script>location.href='../rotina/RotinaEvolucao.php?idQuestionario=". $idQuestionarioDiagPresc ."&idPaciente=". $idPaciente ."';</script>";
 	}
 
 
     if($acao == "cadastrarEvolucao"){
 		$evolucao 	= $_POST["evolucao"];
-		$idQuestionarioDiagPresc = $_POST["idQuestionario"];
+        $idQuestionarioDiagPresc = $_POST["idQuestionario"];
+        $idPaciente = $_POST["idPaciente"];
 
         $questionarioDiagPrescModel->alterarEvolucao($idQuestionarioDiagPresc, $evolucao);
+
+        echo "<script>location.href='../paciente/Paciente.php?cad=sucesso&idPaciente=" . $idPaciente ."';</script>";
 	}
 
 ?>

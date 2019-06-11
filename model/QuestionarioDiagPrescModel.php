@@ -103,6 +103,16 @@
 			return $res;
 		}
 
+		public function listarTodosResultadosIdQuestionario($idQuestionarioDiagPresc){
+			$listarTodosResultadosIdQuestionario = $this->bd->query("SELECT *, resultado.Descricao as resDescricao FROM resultado 
+																		INNER JOIN diagnostico on diagnostico.IdDiagnostico = resultado.IdDiagnostico 
+																		INNER JOIN pacienteresultado on pacienteresultado.IdResultado = resultado.IdResultado 
+																		WHERE pacienteresultado.IdQuestionarioDiagPresc = " . $idQuestionarioDiagPresc);
+			$res = $listarTodosResultadosIdQuestionario->fetchAll(PDO::FETCH_ASSOC);
+			return $res;
+
+		}
+
 
 	}
 

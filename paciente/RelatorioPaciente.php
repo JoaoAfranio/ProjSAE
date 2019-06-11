@@ -21,6 +21,8 @@
     $resDiagnosticos = $questionarioDiagPrescModel->listarTodosDiagnosticosIdQuestionario($idQuestionarioDiagPresc);
 
     $resPrescricoes = $questionarioDiagPrescModel->listarTodasPrescricoesIdQuestionario($idQuestionarioDiagPresc);
+
+    $resResultados = $questionarioDiagPrescModel->listarTodosResultadosIdQuestionario($idQuestionarioDiagPresc);
     
     $questionarioModel = new QuestionarioModel();
     $resSelectAvaliacao = $questionarioModel->listarTodasAvaliacoes($idQuestionario);
@@ -40,6 +42,8 @@
     $resQuestaoMultipla = $respostaMultiplaModel->listarTodasQuestoesMultiplas($idQuestionario);
 
     $resSelectQuestoesMultipla = $respostaMultiplaModel->listarTodasSelectQuestoesMultipla($idQuestionario);
+
+    
 
 ?>
 <head>
@@ -105,55 +109,87 @@
                         <div class="col-md-6 grid-margin stretch-card">
                           <div class="card">
                             <div class="card-body">
-                              <h5>Diagnósticos</h5>
-                            <?php 
-                                foreach($resDiagnosticos as $diagnostico){
-                            ?>
-                              <p class="text-muted"><i class="mdi mdi-check menu-icon"></i><?php echo $diagnostico['Descricao'];?></p>
-                            <?php } ?>
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div class="col-md-6 grid-margin stretch-card">
-                          <div class="card">
-                            <div class="card-body">
                               <h5>Evolução</h5>
-                              <p class="text-muted"></i><?php echo $resQuestionarioDiagPresc["Evolucao"];?></p>
+                              <p class="text-muted"></i><?php 
+                              if($resQuestionarioDiagPresc["Evolucao"] == " "){
+                                echo "Nenhuma evolução aparente";
+                              }else{
+                                echo $resQuestionarioDiagPresc["Evolucao"];
+                              }
+                              ?></p>
                             </div>
                           </div>
                         </div>
+                        
+                      <?php if(count($resPrescricoes) > 0){?>
+                        <div class="col-12">
+                          <div>
+                            <table class="table">
+                              <thead>
 
-                      <div class="col-12">
-                        <div class="table-responsive">
-                          <table id="order-listing" class="table">
-                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Prescrição</th>
+                                    <th>Rotina</th>
 
-                              <tr>
-                                  <th>#</th>
-                                  <th>Prescrição</th>
-                                  <th>Rotina</th>
+                                </tr>
 
-                              </tr>
-
-                            </thead>
-                            <tbody>
-                          <?php
-                          $ordem = 0;
-                          foreach($resPrescricoes as $prescricao){
-                            $ordem++;
-                                              ?>        
-                              <tr>
-                                  <td><?php echo $ordem;?></td>
-                                  <td><?php echo $prescricao['Descricao'];?></td>
-                                  <td><?php echo $prescricao['Rotina'];?> em <?php echo $prescricao['Rotina'];?> horas</td>
-                              </tr>
-                          <?php } ?>
-                            </tbody>
-                          </table>
+                              </thead>
+                              <tbody>
+                            <?php
+                            $ordem = 0;
+                            foreach($resPrescricoes as $prescricao){
+                              $ordem++;
+                                                ?>        
+                                <tr>
+                                    <td><?php echo $ordem;?></td>
+                                    <td><?php echo $prescricao['Descricao'];?></td>
+                                    <td><?php echo $prescricao['Rotina'];?> em <?php echo $prescricao['Rotina'];?></td>
+                                </tr>
+                            <?php } ?>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
-                      </div>
+                      <?php } ?>
+
+                      <?php if(count($resDiagnosticos) > 0){?>
+                        <div class="col-12">
+                          <div>
+                            <table class="table">
+                              <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>Diagnóstico</th>
+                                    <th>Resultado</th>
+
+                                </tr>
+
+                              </thead>
+                              <tbody>
+                            <?php
+                            $ordem = 0;
+                            foreach($resDiagnosticos as $diagnostico){
+                              $ordem++;
+                                                ?>        
+                                <tr>
+                                    <td><?php echo $ordem;?></td>
+                                    <td><?php echo $diagnostico['Descricao'];?></td>
+                                    <td><?php                   
+                                    foreach($resResultados as $resultado){
+                                      if($resultado['IdDiagnostico'] == $diagnostico['IdDiagnostico']){
+                                        echo "<p><i class='mdi mdi-check menu-icon'></i>" . $resultado['resDescricao'] . "</p><br>";
+                                      }
+                                    }
+                                    ?></td>
+                                </tr>
+                            <?php } ?>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      <?php } ?>
                         <!-- ------------------------------------------------------------------------------------------------- -->
                         <!-- ------------------------------------------------------------------------------------------------- -->
                         </div>
@@ -162,9 +198,6 @@
               </div>
 
         <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        <?php require '../template/footer.php';?>
-        <!-- partial -->
       </div>
       <!-- main-panel ends -->
     </div>

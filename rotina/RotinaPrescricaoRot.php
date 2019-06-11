@@ -2,10 +2,10 @@
 <html lang="pt-br">
 <?php 
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteDiagnosticoModel.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/DiagnosticoModel.php";
+
+
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacientePrescricaoModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PrescricaoModel.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PrescricaoDiagnosticoModel.php";
 
     $idQuestionario = $_GET["idQuestionario"];
 
@@ -13,12 +13,10 @@
       $idPaciente = $_GET["idPaciente"];
     }
 
-    $pacienteDiagnosticoModel = new PacienteDiagnosticoModel();
-    $diagnosticoModel = new DiagnosticoModel();
+    $pacientePrescricaoModel = new PacientePrescricaoModel();
     $prescricaoModel = new PrescricaoModel();
-    $prescricaoDiagnosticoModel = new PrescricaoDiagnosticoModel();
 
-    $resQuestionarioDiagnosticos = $pacienteDiagnosticoModel->listarIdQuestionarioDiagPresc($idQuestionario);
+    $resQuestionarioPresc = $pacientePrescricaoModel->listarTodosPorQuestionarioDiagPresc($idQuestionario);
 
 ?>
 
@@ -36,7 +34,7 @@
                       <h4>Paciente: <small class="text-muted">Nome do paciente</small> </h4>
                       <h5>Código do Paciente: <small class="text-muted">Codigo do paciente</small> </h5>
                       <br>
-                      <form id="form-rotina" method="POST" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarPrescricao">
+                      <form id="form-rotina" method="POST" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarPrescricaoRot">
                       <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario;?>">
                       <input type="hidden" name="idPaciente" value="<?php echo $idPaciente?>";>
                         <div role="application" class="wizard clearfix" id="steps-uid-0"><div class="steps clearfix">
@@ -64,30 +62,41 @@
                         <h3 id="steps-uid-0-h-1" tabindex="-1" class="title current">Prescrição</h3>
                           <section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body current" style="left: 0px;" aria-hidden="false">
                           <?php 
+                                  $idPrescricoes = "";
                                   // Busco todos os diagnosticos do questionario
-                                  foreach($resQuestionarioDiagnosticos as $diagnostico){
-                          ?>
-                                  <input type="hidden" name="diagnosticos" value="
-                                  <?php 
-                                    $idDiagnosticos .= $diagnostico['IdDiagnostico'] . ";";
-                                    echo $idDiagnosticos;
-                                  
+                                  foreach($resQuestionarioPresc as $prescricao){
+                                    $idPrescricoes .= $prescricao['IdPrescricao'] . ";";
+                          } ?>
+                                  <input type="hidden" name="prescricoes" value="
+                                  <?php               
+                                    echo $idPrescricoes;
                                   ?>">
+
+                          <?php 
+                                  // Busco todos as prescricoes do questionario
+                                  foreach($resQuestionarioPresc as $prescricao){
+                          ?>
+
                           <?php
-                                    // Busco a descricao do diagnostico atraves do ID
-                                    $resDiagnostico = $diagnosticoModel->listarID($diagnostico["IdDiagnostico"]);  
+                                    // Busco a descricao da prescricao atraves do ID
+                                    $resPrescricao = $prescricaoModel->listarID($prescricao["IdPrescricao"]);  
                                     ?>
-                                    <p><?php echo $resDiagnostico['Descricao']?></p>
-                                    <select multiple name="diagnostico<?php echo $diagnostico["IdDiagnostico"] ?>[]">               
-                                    <?php
-                                    // Busco todas as prescricoes para aquele diagnostico                        
-                                    $resPrescricao = $prescricaoDiagnosticoModel->listarPorIdDiagnostico($resDiagnostico['IdDiagnostico']);
-                                    foreach($resPrescricao as $prescricao){
-                                      // Busco a descricao da prescricao atraves do ID
-                                      $resPrescricao = $prescricaoModel->listarID($prescricao["IdPrescricao"]);  
-                                    ?>
-                                    <option value="<?php echo $prescricao['IdPrescricao']; ?>"><?php echo $resPrescricao["Descricao"];?></option>
-                                    <?php } ?>
+                                    <p><?php echo $resPrescricao['Descricao']?></p>
+                                    <select name="prescricao<?php echo $prescricao["IdPrescricao"] ?>">               
+                                    <option value="0:30 Hr">0:30 Hr</option>
+                                    <option value="1:00 Hr">1:00 Hr</option>
+                                    <option value="1:30 Hr">1:30 Hr</option>
+                                    <option value="2:00 Hr">2:00 Hr</option>
+                                    <option value="3:00 Hr">3:00 Hr</option>
+                                    <option value="4:00 Hr">4:00 Hr</option>
+                                    <option value="5:00 Hr">5:00 Hr</option>
+                                    <option value="6:00 Hr">6:00 Hr</option>
+                                    <option value="7:00 Hr">7:00 Hr</option>
+                                    <option value="8:00 Hr">8:00 Hr</option>
+                                    <option value="9:00 Hr">9:00 Hr</option>
+                                    <option value="10:00 Hr">10:00 Hr</option>
+                                    <option value="12:00 Hr">12:00 Hr</option>
+                                    <option value="24:00 Hr">24:00 Hr</option>
                                     </select>
                                   <?php } ?>
                           </section>

@@ -36,7 +36,17 @@
 		 	$res = $listar->fetchAll(PDO::FETCH_ASSOC);
 		 	return $res;
          }
-         
+		 
+		 public function alterarRotina($idQuestionarioDiagPresc, $idPrescricao, $rotina){
+			$alterarRotina = $this->bd->prepare("UPDATE pacienteprescricao SET Rotina = :rotina WHERE IdQuestionarioDiagPresc = :idQuestionarioDiagPresc AND IdPrescricao = :idPrescricao");
+			$alterarRotina->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc);
+			$alterarRotina->bindParam(":idPrescricao", $idPrescricao);
+            $alterarRotina->bindParam(":rotina", $rotina);
+            $alterarRotina->execute();
+
+		 }
+
+
          public function listarTodasPorDiagQuest($idDiagnostico, $idQuestionarioDiagPresc){
             
             $listarTodasPorDiagQuest = $this->bd->prepare("SELECT * from pacientePrescricao where IdDiagnostico = :idDiagnostico AND IdQuestionarioDiagPresc = :idQuestionarioDiagPresc");
@@ -46,7 +56,18 @@
 
             $res = $listarIdQuestionarioDiagPresc->fetchAll(PDO::FETCH_ASSOC);
             return $res;
-         }
+		 }
+		 
+		 public function listarTodosPorQuestionarioDiagPresc($idQuestionarioDiagPresc){
+
+			$listarTodosPorQuestionarioDiagPresc = $this->bd->prepare("SELECT * from pacienteprescricao where IdQuestionarioDiagPresc = :idQuestionarioDiagPresc");
+            $listarTodosPorQuestionarioDiagPresc->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc);
+            $listarTodosPorQuestionarioDiagPresc->execute();
+
+            $res = $listarTodosPorQuestionarioDiagPresc->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+
+		 }
 
 
 	}
