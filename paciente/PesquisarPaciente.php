@@ -79,7 +79,6 @@
                             ?>
                             <p class="page-description mt-1 w-75 text-muted">Unidade de Internação: <?php echo $nomeUnidade?></p>
                             <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../paciente/Paciente.php?idPaciente=<?php echo $pessoa['IdPaciente'];?>"><i class="mdi mdi-account-circle menu-icon"></i> Detalhar Paciente</a>
-                            <a target="_blank" class="mBottom10 buttonPesqPaciente btn btn-primary" href="pacientepdf.php?idPaciente=<?php echo $pessoa['IdPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
                           </div>
                           <div class="col-6">
                             <p class="d-block h4 mb-0" href="#">Diagnósticos:</p>

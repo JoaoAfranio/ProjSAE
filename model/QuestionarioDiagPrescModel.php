@@ -13,13 +13,14 @@
 
 		 }
 
-		 public function inserir($dataRealizado, $evolucao, $idPaciente, $idFuncionario){
+		 public function inserir($dataRealizado, $evolucao, $idPaciente, $idFuncionario, $idQuestionario){
 
-		 	$insercao = $this->bd->prepare("INSERT INTO QuestionarioDiagPresc (DataRealizado, Evolucao, IdPaciente, IdFuncionario) VALUES (:dataRealizado, :evolucao, :idPaciente, :idFuncionario)");
+		 	$insercao = $this->bd->prepare("INSERT INTO QuestionarioDiagPresc (DataRealizado, Evolucao, IdPaciente, IdFuncionario, IdQuestionario) VALUES (:dataRealizado, :evolucao, :idPaciente, :idFuncionario, :idQuestionario)");
 			$insercao->bindParam(":dataRealizado", $dataRealizado);
 			$insercao->bindParam(":evolucao", $evolucao);
 			$insercao->bindParam(":idPaciente", $idPaciente);
 			$insercao->bindParam(":idFuncionario", $idFuncionario);
+			$insercao->bindParam(":idQuestionario", $idQuestionario);
 		 	$insercao->execute();
 
 		 }

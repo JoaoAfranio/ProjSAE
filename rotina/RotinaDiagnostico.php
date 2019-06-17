@@ -10,6 +10,8 @@
       $idPaciente = $_GET["idPaciente"];
     }
 
+    $idQuestionario = $_GET["idQuestionario"];
+
     $pacienteModel = new PacienteModel();
     $resPaciente = $pacienteModel->listarInfosPaciente($idPaciente);
     
@@ -34,6 +36,7 @@
                       <br>
                       <form id="form-rotina" method="post" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarDiagnostico">
                       <input type="hidden" name="idPaciente" value="<?php echo $idPaciente?>";>
+                      <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario?>";>
                         <div role="application" class="wizard clearfix" id="steps-uid-0"><div class="steps clearfix">
                             <ul role="tablist">
                                 <li role="tab" class="first current" aria-disabled="false" aria-selected="true">

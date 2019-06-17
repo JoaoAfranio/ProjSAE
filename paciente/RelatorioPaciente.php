@@ -12,38 +12,61 @@
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaMultiplaModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/QuestionarioDiagPrescModel.php";
 
-    $idQuestionario = $_POST["idQuestionario"];
-    $idQuestionarioDiagPresc = $_POST["idQuestionarioDiagPresc"];
+    $idQuestionario = $_GET["idQuestionario"];
+    $idQuestionarioDiagPresc = $_GET["idQuestionarioDiagPresc"];
+    $idPaciente = $_GET["idPaciente"];
 
-   
+
 
     $questionarioDiagPrescModel = new QuestionarioDiagPrescModel();
+    $respostaAbertaModel = new RespostaAbertaModel();
+    $respostaUnicaModel = new RespostaUnicaModel();
+    $respostaMultiplaModel = new RespostaMultiplaModel();
+    $pacienteModel = new PacienteModel();
+    $questionarioModel = new QuestionarioModel();
+
+
     $resDiagnosticos = $questionarioDiagPrescModel->listarTodosDiagnosticosIdQuestionario($idQuestionarioDiagPresc);
 
     $resPrescricoes = $questionarioDiagPrescModel->listarTodasPrescricoesIdQuestionario($idQuestionarioDiagPresc);
 
     $resResultados = $questionarioDiagPrescModel->listarTodosResultadosIdQuestionario($idQuestionarioDiagPresc);
     
-    $questionarioModel = new QuestionarioModel();
+    $resQuestionarioDiagPresc = $questionarioDiagPrescModel->listarID($idQuestionarioDiagPresc);
+    
+    //Listar todas avaliacoes respondidas
     $resSelectAvaliacao = $questionarioModel->listarTodasAvaliacoes($idQuestionario);
 
-    $resQuestionarioDiagPresc = $questionarioDiagPrescModel->listarID($idQuestionarioDiagPresc);
+    //Listar Questionario Dados Pessoais
+    $resSelectDadosPessoais = $questionarioModel->listarAvaliacaoDados($idPaciente);
+    $idQuestionarioDadosPessoais = $resSelectDadosPessoais['IdQuestionario'];
 
-    $pacienteModel = new PacienteModel();
+    $resDadosQuestaoAberta = $respostaAbertaModel->listarTodasRespostasAbertasQuestionario($idQuestionarioDadosPessoais);
+    $resDadosQuestaoUnica = $respostaUnicaModel->listarTodasRespostasUnicasQuestionario($idQuestionarioDadosPessoais);
+    $resDadosQuestaoMultipla = $respostaMultiplaModel->listarTodasQuestoesMultiplas($idQuestionarioDadosPessoais);
+    $resDadosSelectQuestoesMultipla = $respostaMultiplaModel->listarTodasSelectQuestoesMultipla($idQuestionarioDadosPessoais);
+
+    
+    //Listar Paciente
     $resPaciente = $pacienteModel->listarInfoPeloIdQuestionario($idQuestionario);
-
-    $respostaAbertaModel = new RespostaAbertaModel();
+    
+    
+    // Listar Respostas Questionarios
     $resQuestaoAberta = $respostaAbertaModel->listarTodasRespostasAbertasQuestionario($idQuestionario);
-
-    $respostaUnicaModel = new RespostaUnicaModel();
     $resQuestaoUnica = $respostaUnicaModel->listarTodasRespostasUnicasQuestionario($idQuestionario);
-    
-    $respostaMultiplaModel = new RespostaMultiplaModel();
     $resQuestaoMultipla = $respostaMultiplaModel->listarTodasQuestoesMultiplas($idQuestionario);
-
     $resSelectQuestoesMultipla = $respostaMultiplaModel->listarTodasSelectQuestoesMultipla($idQuestionario);
-
     
+    //Adicionar avaliacao de dados a todas as avaliacoes
+    array_push($resSelectAvaliacao, $resSelectDadosPessoais);
+
+    //Adicionar a resposta de dados as outras respostas
+    array_push($resQuestaoAberta, ...$resDadosQuestaoAberta);
+    array_push($resQuestaoUnica, ...$resDadosQuestaoUnica);
+    array_push($resQuestaoMultipla, ...$resDadosQuestaoMultipla);
+    array_push($resSelectQuestoesMultipla, ...$resDadosSelectQuestoesMultipla);
+
+
 
 ?>
 <head>
@@ -76,7 +99,10 @@
                           <div class="container-fluid d-flex justify-content-between">
                           <div class="row">
                             <div class="col-md-12 pl-0">
-                            <?php foreach($resPaciente as $paciente){?>
+                            <?php foreach($resPaciente as $paciente){
+                                    
+                              ?>
+                              
                               <p class="mt-5 mb-2"><b>Paciente <u><?php echo $paciente['Nome'];?></u></b></p>
                               <p>Codigo Paciente: <?php echo $paciente['CodigoPaciente'];?>,<br>Unidade de Internação: <?php echo $paciente['NomeUnidade'];?>,<br>Tipo Paciente: <?php echo $paciente['Descricao'];?></p>
                             </div>

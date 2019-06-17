@@ -61,24 +61,40 @@
 
         public function listarQuestFormFunc($idPaciente){
             //INNER JOIN Questionario, Formulario e Funcionario
-            $listarQuestFormFunc = $this->bd->query("SELECT IdQuestionario, form.IdFormulario, IdPaciente, DATE_FORMAT(DataRealizado, '%d/%m/%Y') AS dataFormatada, Descricao, func.Nome
-                                        FROM Questionario 
-                                        INNER JOIN formulario as form on form.IdFormulario = questionario.IdFormulario 
-                                        INNER JOIN funcionario as func on func.IdFuncionario = questionario.IdFuncionario
-                                        WHERE IdPaciente = '$idPaciente'");
+            $listarQuestFormFunc = $this->bd->query("SELECT questionario.IdQuestionario, questionariodiagpresc.IdQuestionarioDiagPresc, form.IdFormulario, questionario.IdPaciente, DATE_FORMAT(questionario.DataRealizado, '%d/%m/%Y') AS dataFormatada, Descricao, func.Nome
+                                                    FROM Questionario 
+                                                    INNER JOIN formulario as form on form.IdFormulario = questionario.IdFormulario 
+                                                    INNER JOIN funcionario as func on func.IdFuncionario = questionario.IdFuncionario
+                                                    INNER JOIN questionariodiagpresc on questionariodiagpresc.IdQuestionario = questionario.IdQuestionario
+                                                    WHERE questionario.IdPaciente =  '$idPaciente'");
             $res = $listarQuestFormFunc->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
 
         public function listarTodasAvaliacoes($idQuestionario){
-            $listarTodasAvaliacoes = $this->bd->query("SELECT avaliacao.IdAvaliacao, avaliacao.Descricao from aplicacao INNER JOIN formulario on formulario.IdFormulario = aplicacao.IdFormulario
-                                                    INNER JOIN avaliacao on avaliacao.IdAvaliacao = aplicacao.IdAvaliacao
-                                                    INNER JOIN questionario on questionario.IdFormulario = formulario.IdFormulario
-                                                    WHERE questionario.IdQuestionario = '$idQuestionario'");
+            $listarTodasAvaliacoes = $this->bd->query(
+            "SELECT avaliacao.IdAvaliacao, avaliacao.Descricao from aplicacao INNER JOIN formulario on formulario.IdFormulario = aplicacao.IdFormulario
+                    INNER JOIN avaliacao on avaliacao.IdAvaliacao = aplicacao.IdAvaliacao
+                    INNER JOIN questionario on questionario.IdFormulario = formulario.IdFormulario
+                        WHERE questionario.IdQuestionario = $idQuestionario");
+
             $res = $listarTodasAvaliacoes->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
 
+        public function listarAvaliacaoDados($idPaciente){
+            $listarAvaliacaoDados = $this->bd->query("SELECT * from aplicacao 
+                                                        INNER JOIN formulario on formulario.IdFormulario = aplicacao.IdFormulario 
+                                                        INNER JOIN avaliacao on avaliacao.IdAvaliacao = aplicacao.IdAvaliacao 
+                                                        INNER JOIN questionario on questionario.IdFormulario = formulario.IdFormulario 
+                                                            WHERE idPaciente = '$idPaciente'
+                                                                AND avaliacao.IdAvaliacao = 22 OR 
+                                                                avaliacao.IdAvaliacao = 23 OR 
+                                                                avaliacao.IdAvaliacao = 24");
+            $res = $listarAvaliacaoDados->fetch(PDO::FETCH_ASSOC);
+            return $res;
+
+        }
 
 	}
 

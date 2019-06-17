@@ -40,7 +40,7 @@
 
     
     if($acao == "cadastrardados"){
-
+        
      
         $idTipoPaciente = $_GET['idTipoPaciente'];
         $idPaciente = $_GET['idPaciente'];
@@ -48,16 +48,18 @@
         //[A FAZER] Utilizar Session para pegar IdUsuarios
         $idFuncionario = 21;
      
-        if($idTipoPaciente == 3){
-           $idFormulario = 10;
-        }else if($idTipoPaciente == 2){
-           $idFormulario = 11;
-        }else if($idTipoPaciente == 1){
-           $idFormulario = 12;
-        }else{
-           exit();
-        }
-     
+        if($idTipoPaciente == 1){
+            // Adulto
+            $idFormulario = 15;
+          }else if($idTipoPaciente == 2){
+            // Pediatrico
+            $idFormulario = 14;
+          }else if($idTipoPaciente == 3){
+            // RN
+            $idFormulario = 13;
+          }else{
+            $idFormulario = "0";
+          }
         $dataHoje = date('Y-m-d');
      
      
@@ -122,7 +124,9 @@
         
         } // Fim Foreach POST
          
-     echo "<script>location.href='../paciente/CadastrarPaciente.php';</script>";
+
+
+     echo "<script>location.href='../examefisico/ExameFisico.php?idPaciente=" . $idPaciente . "&tipoPaciente=". $idTipoPaciente ."';</script>";
     }
 
 	if($acao == "deletar"){

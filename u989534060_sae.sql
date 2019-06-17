@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Jun-2019 às 00:45
+-- Generation Time: 17-Jun-2019 às 18:18
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.3
 
@@ -288,7 +288,10 @@ INSERT INTO `paciente` (`IdPaciente`, `Nome`, `IdUnidadeInternacao`, `IdTipoPaci
 (29, 'theo', 1, 1, 5463),
 (30, 'theo', 1, 3, 5463),
 (31, 'Vinicius', 1, 3, 669),
-(32, 'TestePacientePediatrico', 4, 2, 3213);
+(32, 'TestePacientePediatrico', 4, 2, 3213),
+(34, 'Joao Antonio', 3, 3, 303),
+(35, 'Guilherme', 3, 3, 202),
+(36, 'Guilherme2', 3, 3, 12);
 
 -- --------------------------------------------------------
 
@@ -317,12 +320,14 @@ INSERT INTO `pacientediagnostico` (`IdDiagnostico`, `IdQuestionarioDiagPresc`) V
 (9, 13),
 (9, 14),
 (9, 15),
+(9, 22),
 (10, 4),
 (10, 6),
 (10, 7),
 (10, 10),
 (10, 11),
 (10, 12),
+(10, 22),
 (11, 4),
 (11, 6),
 (11, 7),
@@ -359,13 +364,17 @@ INSERT INTO `pacienteprescricao` (`IdDiagnostico`, `IdPrescricao`, `IdQuestionar
 (9, 20, 5, ''),
 (9, 20, 12, ''),
 (9, 20, 15, '8:00 Hr'),
+(9, 20, 22, '0:30 Hr'),
 (9, 21, 5, ''),
 (9, 21, 14, ''),
+(9, 21, 22, '0:30 Hr'),
 (9, 22, 5, ''),
 (10, 27, 4, ''),
 (10, 27, 12, ''),
+(10, 27, 22, '1:30 Hr'),
 (10, 28, 4, ''),
 (10, 28, 12, ''),
+(10, 28, 22, '5:00 Hr'),
 (10, 29, 11, ''),
 (10, 29, 12, ''),
 (10, 30, 11, ''),
@@ -405,6 +414,7 @@ CREATE TABLE `pacienteresultado` (
 INSERT INTO `pacienteresultado` (`IdResultado`, `IdQuestionarioDiagPresc`) VALUES
 (13, 14),
 (13, 15),
+(13, 22),
 (14, 14),
 (19, 5),
 (20, 5),
@@ -417,7 +427,9 @@ INSERT INTO `pacienteresultado` (`IdResultado`, `IdQuestionarioDiagPresc`) VALUE
 (30, 4),
 (31, 4),
 (31, 7),
+(31, 22),
 (32, 7),
+(32, 22),
 (37, 4),
 (39, 7),
 (42, 7),
@@ -587,7 +599,7 @@ INSERT INTO `questionario` (`IdQuestionario`, `IdFormulario`, `IdPaciente`, `Dat
 (19, 10, 1, '2019-05-28', 21),
 (20, 10, 1, '2019-05-28', 21),
 (21, 12, 1, '2019-05-28', 21),
-(22, 10, 27, '2019-05-28', 21),
+(22, 13, 27, '2019-05-28', 21),
 (23, 10, 27, '2019-05-28', 21),
 (24, 12, 1, '2019-05-28', 21),
 (25, 10, 29, '2019-05-30', 21),
@@ -654,7 +666,19 @@ INSERT INTO `questionario` (`IdQuestionario`, `IdFormulario`, `IdPaciente`, `Dat
 (86, 11, 32, '2019-06-11', 21),
 (87, 11, 32, '2019-06-11', 21),
 (88, 11, 32, '2019-06-11', 21),
-(89, 11, 32, '2019-06-11', 21);
+(89, 11, 32, '2019-06-11', 21),
+(90, 10, 34, '2019-06-17', 21),
+(91, 10, 34, '2019-06-17', 21),
+(92, 10, 34, '2019-06-17', 21),
+(93, 10, 34, '2019-06-17', 21),
+(94, 10, 34, '2019-06-17', 21),
+(95, 13, 35, '2019-06-17', 21),
+(96, 10, 35, '2019-06-17', 21),
+(97, 10, 35, '2019-06-17', 21),
+(98, 13, 36, '2019-06-17', 21),
+(99, 10, 36, '2019-06-17', 21),
+(100, 11, 32, '2019-06-17', 21),
+(101, 10, 27, '2019-06-17', 21);
 
 -- --------------------------------------------------------
 
@@ -667,26 +691,34 @@ CREATE TABLE `questionariodiagpresc` (
   `DataRealizado` date NOT NULL,
   `Evolucao` varchar(500) NOT NULL,
   `IdPaciente` int(11) NOT NULL,
-  `IdFuncionario` int(11) NOT NULL
+  `IdFuncionario` int(11) NOT NULL,
+  `IdQuestionario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `questionariodiagpresc`
 --
 
-INSERT INTO `questionariodiagpresc` (`IdQuestionarioDiagPresc`, `DataRealizado`, `Evolucao`, `IdPaciente`, `IdFuncionario`) VALUES
-(4, '2019-06-04', 'aaaaaaaaaaaaaa', 1, 21),
-(5, '2019-06-05', 'dsadsadsadsadsa', 1, 21),
-(6, '2019-06-06', ' ', 1, 21),
-(7, '2019-06-11', 'GDSAGDASGDASGDAS', 1, 21),
-(8, '2019-06-11', ' ', 1, 21),
-(9, '2019-06-11', ' ', 1, 21),
-(10, '2019-06-11', ' ', 1, 21),
-(11, '2019-06-11', ' ', 1, 21),
-(12, '2019-06-11', ' ', 1, 21),
-(13, '2019-06-11', 'gvfdgfd', 1, 21),
-(14, '2019-06-11', 'DFSAXACASVASCA', 1, 21),
-(15, '2019-06-12', 'fsacsacsafvsafdsa', 1, 21);
+INSERT INTO `questionariodiagpresc` (`IdQuestionarioDiagPresc`, `DataRealizado`, `Evolucao`, `IdPaciente`, `IdFuncionario`, `IdQuestionario`) VALUES
+(4, '2019-06-04', 'aaaaaaaaaaaaaa', 1, 21, 1),
+(5, '2019-06-05', 'dsadsadsadsadsa', 1, 21, 1),
+(6, '2019-06-06', ' ', 1, 21, 1),
+(7, '2019-06-11', 'GDSAGDASGDASGDAS', 1, 21, 1),
+(8, '2019-06-11', ' ', 1, 21, 1),
+(9, '2019-06-11', ' ', 1, 21, 1),
+(10, '2019-06-11', ' ', 1, 21, 1),
+(11, '2019-06-11', ' ', 1, 21, 1),
+(12, '2019-06-11', ' ', 1, 21, 1),
+(13, '2019-06-11', 'gvfdgfd', 1, 21, 1),
+(14, '2019-06-11', 'DFSAXACASVASCA', 1, 21, 1),
+(15, '2019-06-12', 'fsacsacsafvsafdsa', 1, 21, 1),
+(16, '2019-06-17', 'Sem evolucao', 34, 21, 92),
+(17, '2019-06-17', 'Nenhum resultado aparente', 35, 21, 96),
+(18, '2019-06-17', 'dsadsadsa', 35, 21, 97),
+(19, '2019-06-17', 'asacascadsa', 36, 21, 99),
+(20, '2019-06-17', ' ', 32, 21, 100),
+(21, '2019-06-17', 'sem evolucao aparente\r\n', 32, 21, 100),
+(22, '2019-06-17', 'EvolucaoTesteRotina', 27, 21, 101);
 
 -- --------------------------------------------------------
 
@@ -807,7 +839,61 @@ INSERT INTO `resposta` (`IdResposta`, `IdQuestionario`, `IdQuestao`, `IdAplicaca
 (98, 86, 8, 15, 25),
 (99, 87, 8, 15, 25),
 (100, 88, 8, 15, 25),
-(101, 89, 8, 15, 25);
+(101, 89, 8, 15, 25),
+(102, 90, 13, 10, 22),
+(103, 90, 14, 10, 22),
+(104, 90, 15, 10, 22),
+(105, 90, 16, 10, 22),
+(106, 90, 17, 10, 22),
+(107, 90, 18, 10, 22),
+(108, 90, 19, 10, 22),
+(109, 91, 13, 10, 22),
+(110, 91, 14, 10, 22),
+(111, 91, 15, 10, 22),
+(112, 91, 16, 10, 22),
+(113, 91, 17, 10, 22),
+(114, 91, 18, 10, 22),
+(115, 91, 19, 10, 22),
+(116, 92, 13, 10, 22),
+(117, 92, 14, 10, 22),
+(118, 92, 15, 10, 22),
+(119, 92, 16, 10, 22),
+(120, 92, 17, 10, 22),
+(121, 92, 18, 10, 22),
+(122, 92, 19, 10, 22),
+(123, 93, 8, 14, 11),
+(124, 93, 20, 14, 11),
+(125, 93, 22, 14, 11),
+(126, 94, 8, 14, 11),
+(127, 94, 20, 14, 11),
+(128, 94, 22, 14, 11),
+(129, 95, 13, 10, 22),
+(130, 95, 14, 10, 22),
+(131, 95, 15, 10, 22),
+(132, 95, 16, 10, 22),
+(133, 95, 17, 10, 22),
+(134, 95, 18, 10, 22),
+(135, 95, 19, 10, 22),
+(136, 96, 8, 14, 11),
+(137, 96, 20, 14, 11),
+(138, 96, 22, 14, 11),
+(139, 97, 8, 14, 11),
+(140, 97, 20, 14, 11),
+(141, 97, 22, 14, 11),
+(142, 98, 13, 10, 22),
+(143, 98, 14, 10, 22),
+(144, 98, 15, 10, 22),
+(145, 98, 16, 10, 22),
+(146, 98, 17, 10, 22),
+(147, 98, 18, 10, 22),
+(148, 98, 19, 10, 22),
+(149, 99, 8, 14, 11),
+(150, 99, 20, 14, 11),
+(151, 99, 22, 14, 11),
+(152, 100, 8, 15, 25),
+(153, 101, 8, 14, 11),
+(154, 101, 20, 14, 11),
+(155, 101, 22, 14, 11);
 
 -- --------------------------------------------------------
 
@@ -891,7 +977,43 @@ INSERT INTO `respostaaberta` (`IdRespostaAberta`, `DescricaoRespostaAberta`, `Id
 (63, '20', 80),
 (64, '2019-05-16', 81),
 (65, '5', 83),
-(66, 'jkmjk ', 84);
+(66, 'jkmjk ', 84),
+(67, 'Maria', 102),
+(68, '1', 103),
+(69, '0', 104),
+(70, '1', 105),
+(71, '2019-06-17', 106),
+(72, '2', 108),
+(73, 'Maria', 109),
+(74, '1', 110),
+(75, '0', 111),
+(76, '1', 112),
+(77, '2019-06-17', 113),
+(78, '2', 115),
+(79, 'Maria', 116),
+(80, '1', 117),
+(81, '0', 118),
+(82, '1', 119),
+(83, '2019-06-17', 120),
+(84, '2', 122),
+(85, 'teste', 124),
+(86, 'tetgste', 127),
+(87, 'Maria', 129),
+(88, '1', 130),
+(89, '1', 131),
+(90, '1', 132),
+(91, '2019-06-18', 133),
+(92, '2', 135),
+(93, 'Teste', 137),
+(94, 'teste2', 140),
+(95, 'Mariaa', 142),
+(96, '2', 143),
+(97, '1', 144),
+(98, '1', 145),
+(99, '2019-06-19', 146),
+(100, '23', 148),
+(101, '2121', 150),
+(102, 'questaoAbertaTesteRotina', 154);
 
 -- --------------------------------------------------------
 
@@ -908,7 +1030,14 @@ CREATE TABLE `respostamultipla` (
 --
 
 INSERT INTO `respostamultipla` (`IdResposta`) VALUES
-(101);
+(101),
+(123),
+(126),
+(136),
+(139),
+(149),
+(152),
+(153);
 
 -- --------------------------------------------------------
 
@@ -928,7 +1057,18 @@ CREATE TABLE `respostamultiplaafirmativa` (
 
 INSERT INTO `respostamultiplaafirmativa` (`IdResposta`, `IdAfirmativa`, `IdQuestao`) VALUES
 (101, 5, 8),
-(101, 6, 8);
+(101, 6, 8),
+(123, 4, 8),
+(126, 4, 8),
+(126, 5, 8),
+(136, 4, 8),
+(136, 5, 8),
+(139, 5, 8),
+(149, 4, 8),
+(149, 5, 8),
+(152, 5, 8),
+(153, 4, 8),
+(153, 5, 8);
 
 -- --------------------------------------------------------
 
@@ -949,12 +1089,23 @@ CREATE TABLE `respostaunica` (
 INSERT INTO `respostaunica` (`IdResposta`, `IdAfirmativa`, `IdQuestao`) VALUES
 (61, 6, 22),
 (85, 6, 22),
+(125, 6, 22),
+(128, 6, 22),
+(138, 6, 22),
+(141, 6, 22),
+(151, 6, 22),
+(155, 6, 22),
 (14, 7, 18),
 (21, 7, 18),
 (42, 7, 18),
 (58, 7, 18),
 (75, 7, 18),
 (82, 7, 18),
+(107, 7, 18),
+(114, 7, 18),
+(121, 7, 18),
+(134, 7, 18),
+(147, 7, 18),
 (28, 8, 18),
 (35, 8, 18),
 (50, 8, 18);
@@ -1221,7 +1372,8 @@ ALTER TABLE `questionario`
 ALTER TABLE `questionariodiagpresc`
   ADD PRIMARY KEY (`IdQuestionarioDiagPresc`),
   ADD KEY `paciente_questionariodiagpresc_fk` (`IdPaciente`),
-  ADD KEY `funcionario_questionarioDiagPresc_fk` (`IdFuncionario`);
+  ADD KEY `funcionario_questionarioDiagPresc_fk` (`IdFuncionario`),
+  ADD KEY `questionario_questionariodiagpresc_fk` (`IdQuestionario`);
 
 --
 -- Indexes for table `resposta`
@@ -1335,7 +1487,7 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `IdPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `IdPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `prescricao`
@@ -1353,25 +1505,25 @@ ALTER TABLE `questao`
 -- AUTO_INCREMENT for table `questionario`
 --
 ALTER TABLE `questionario`
-  MODIFY `IdQuestionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `IdQuestionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `questionariodiagpresc`
 --
 ALTER TABLE `questionariodiagpresc`
-  MODIFY `IdQuestionarioDiagPresc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `IdQuestionarioDiagPresc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `resposta`
 --
 ALTER TABLE `resposta`
-  MODIFY `IdResposta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `IdResposta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `respostaaberta`
 --
 ALTER TABLE `respostaaberta`
-  MODIFY `IdRespostaAberta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `IdRespostaAberta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `resultado`
@@ -1488,7 +1640,8 @@ ALTER TABLE `questionario`
 --
 ALTER TABLE `questionariodiagpresc`
   ADD CONSTRAINT `funcionario_questionarioDiagPresc_fk` FOREIGN KEY (`IdFuncionario`) REFERENCES `funcionario` (`IdFuncionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `paciente_questionariodiagpresc_fk` FOREIGN KEY (`IdPaciente`) REFERENCES `paciente` (`IdPaciente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `paciente_questionariodiagpresc_fk` FOREIGN KEY (`IdPaciente`) REFERENCES `paciente` (`IdPaciente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `questionario_questionariodiagpresc_fk` FOREIGN KEY (`IdQuestionario`) REFERENCES `questionario` (`IdQuestionario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `resposta`

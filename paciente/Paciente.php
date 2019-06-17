@@ -62,9 +62,7 @@
               <h5>Unidade de internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
               <br>
               <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../examefisico/ExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>&tipoPaciente=<?php echo $paciente['IdTipoPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Realizar Exame Físico</a>
-              <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>">
-              <i class="mdi mdi-playlist-check menu-icon"></i> Realizar Rotina</a>
-              <a data-toggle="modal" data-target="#exampleModal-2" class="mBottom10 buttonPesqPaciente btn btn-primary"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
+              
               <h4 style="margin-top: 20px;">Histórico do paciente</h4>
               <div class="row">
                 <div class="col-12">
@@ -76,9 +74,7 @@
                             <th>Ordem #</th>
                             <th>Data Realizada</th>
                             <th>Responsável</th>
-                            <th>Formulário</th>
-
-                            <th>Visualizar</th>
+                            <th>Gerar PDF</th>
                         </tr>
 
                       </thead>
@@ -93,10 +89,7 @@
                             <td><?php echo $ordem;?></td>
                             <td><?php echo $questionario['dataFormatada'];?></td>
                             <td><?php echo $questionario['Nome'];?></td>
-                            <td><?php echo $questionario['Descricao'];?></td>
-                            <td>
-                              <a class="btn btn-success btn-md" <?php echo 'href="pacienteFormulario.php?idPaciente='. $paciente['IdPaciente'] . '&idQuestionario=' . $questionario['IdQuestionario'] . '"';?>>Ver</a>
-                            </td>
+                            <td><a href="RelatorioPaciente.php?idPaciente=<?php echo $paciente['IdPaciente']; ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>&idQuestionarioDiagPresc=<?php echo $questionario['IdQuestionarioDiagPresc'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a></td>
                         </tr>
                     <?php } ?>
                       </tbody>

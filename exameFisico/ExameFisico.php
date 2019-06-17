@@ -79,7 +79,7 @@
               <div class="card">
                 <div class="card-body">
                   <h5><?php echo $avaliacao['Descricao'];?></h5>
-                  <form action="../controller/PacienteController.php?acao=cadastrardados&idPaciente=<?php echo $idPaciente;?>&idTipoPaciente=<?php echo $idTipoPaciente;?>" method="post" class="forms-sample">
+                  <form action="../controller/ExameFisicoController.php?acao=cadastrardados&idPaciente=<?php echo $idPaciente;?>&idTipoPaciente=<?php echo $idTipoPaciente;?>" method="post" class="forms-sample">
                     <?php
                     $idAvaliacao = $avaliacao['IdAvaliacao'];
 
