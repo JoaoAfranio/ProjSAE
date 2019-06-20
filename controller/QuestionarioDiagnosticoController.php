@@ -43,20 +43,30 @@
         $idQuestionarioDiagPresc = $_POST["idQuestionario"];
         $idPaciente = $_POST["idPaciente"];
         
-        if(isset($_POST["diagnosticos"])) {
+       if(isset($_POST["diagnosticos"])) {
             
             $diagnosticos  = ($_POST["diagnosticos"]);
             $idDiagnosticos = explode(";", $diagnosticos);
+            
 
-            foreach($idDiagnosticos as $diag){
-                $idDiagnostico = trim($diag); 
-                if($diag != ""){
-                    foreach($_POST["diagnostico" . $idDiagnostico] as $idPrescricao){
-                        $pacientePrescricaoModel->inserir($idDiagnostico, $idPrescricao, $idQuestionarioDiagPresc);
-                    }
-                }  
+            if(count($idDiagnosticos) == 2){
+                $idDiagnostico =  $diagnosticos[-2];
+
+                foreach($_POST["diagnostico" . $idDiagnostico] as $idPrescricao){
+                    $pacientePrescricaoModel->inserir($idDiagnostico, $idPrescricao, $idQuestionarioDiagPresc);
+                    break;
+                }
+              
+            }else{
+                foreach($idDiagnosticos as $diag){
+                    $idDiagnostico = trim($diag); 
+                    if($diag != ""){
+                        foreach($_POST["diagnostico" . $idDiagnostico] as $idPrescricao){
+                            $pacientePrescricaoModel->inserir($idDiagnostico, $idPrescricao, $idQuestionarioDiagPresc);
+                        }
+                    }  
+                }
             }
-
         }
         echo "<script>location.href='../rotina/RotinaPrescricaoRot.php?idQuestionario=". $idQuestionarioDiagPresc ."&idPaciente=". $idPaciente ."';</script>";
     }

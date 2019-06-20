@@ -42,38 +42,39 @@
 
 
 	if($acao == "autenticar"){
-		$login 		= $_POST["login"];
-		$senha 		= $_POST["senha"];
-		$usuario 	= $funcionarioModel->autenticacao($login, $senha);
+        $login         = $_POST["login"];
+        $senha         = $_POST["senha"];
+        $usuario     = $funcionarioModel->autenticacao($login, $senha);
 
-		if($usuario == false){
-			echo "<script>alert('Usuário ou senha inválidos'); 
-			location.href='/sae/index.php';</script>";
-		}else{
+        if($usuario == false){
+            echo "<script>alert('Usuário ou senha inválidos'); 
+            location.href='/sae/index.php';</script>";
+        }else{
 
-			session_start();
-			$_SESSION["nomeUsuario"] = $usuario["nome"];
-			$_SESSION["idUsuario"] = $usuario["IdFuncionario"];
+            session_start();
+            $_SESSION["nomeUsuario"] = $usuario["nome"];
+            $_SESSION["idUsuario"] = $usuario["IdFuncionario"];
 
-			$_SESSION["logado"] = true;
-			$_SESSION["login"] = $_POST["login"];
+            $_SESSION["logado"] = true;
+            $_SESSION["login"] = $_POST["login"];
 
-			if($usuario["IdTipoFuncionario"] == 1){
-				$_SESSION["TipoFuncionario"] = "administrador";
-				echo "<script>location.href='/sae/questao/Questao.php'</script>";
+            if($usuario["IdTipoFuncionario"] == 1){
+                $_SESSION["TipoFuncionario"] = "administrador";
+                echo "<script>location.href='/sae/questao/Questao.php'</script>";
 
-			}else{
-				echo "<script>location.href='/sae/index.php'</script>";
-			}
+            }
+            if($usuario["IdTipoFuncionario"] == 2){
+                $_SESSION["TipoFuncionario"] = "enfermeiro";
+                echo "<script>location.href='/sae/paciente/CadastrarPaciente.php'</script>";
+
+            }else{
+                echo "<script>location.href='/sae/index.php'</script>";
+            }
 
 
-
-			
-		}
 
 
 	}
-	
 
 
 

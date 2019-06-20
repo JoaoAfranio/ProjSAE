@@ -28,8 +28,8 @@
     exit();
   }
   
-  if($_SESSION["TipoFuncionario"]!="administrador"){
-    header("Location:/sae/index.php");
+  if(($_SESSION["TipoFuncionario"]==NULL) || ($_SESSION["TipoFuncionario"]=="")) {
+    header("Location:/index.php");
   }
 
 ?>
