@@ -73,7 +73,7 @@ if($acao == "cadastrardados"){
         $resposta = $respostaModel->listarResposta($idAplicacao,$idAvaliacao,$idQuestao,$idQuestionario);
         $idResposta = $resposta['IdResposta'];
 
-        if($idTipoQuestao == 3){
+        if($idTipoQuestao == 3 && $idAfirmativa != "--"){
             // Questao Fechada Multipla Escolha
             $respostaMultiplaModel->inserir($idResposta);
             foreach($respostaQuestao as $idAfirmativa){
@@ -91,7 +91,7 @@ if($acao == "cadastrardados"){
             }
         }
     
-        if(($idTipoQuestao == 2) || ($idTipoQuestao == 5)){
+        if((($idTipoQuestao == 2) || ($idTipoQuestao == 5)) && ($respostaQuestao != "--")){
         // Questao Fechada Escolha Unica
         $respostaUnicaModel->inserir($idResposta, $respostaQuestao, $idQuestao);
 
@@ -101,7 +101,7 @@ if($acao == "cadastrardados"){
     } // Fim Foreach POST
      
     
- echo "<script>location.href='../rotina/RotinaDiagnostico.php?idPaciente=" . $idPaciente . "&idQuestionario=". $idQuestionario ."';</script>";
+ echo "<script>location.href='../paciente/Paciente.php?idPaciente=" . $idPaciente . "';</script>";
 }
 
 ?>

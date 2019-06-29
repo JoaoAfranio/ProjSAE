@@ -61,12 +61,12 @@
 
         public function listarQuestFormFunc($idPaciente){
             //INNER JOIN Questionario, Formulario e Funcionario
-            $listarQuestFormFunc = $this->bd->query("SELECT questionario.IdQuestionario, questionariodiagpresc.IdQuestionarioDiagPresc, form.IdFormulario, questionario.IdPaciente, DATE_FORMAT(questionario.DataRealizado, '%d/%m/%Y') AS dataFormatada, Descricao, func.Nome
+            $listarQuestFormFunc = $this->bd->query("SELECT questionario.IdQuestionario, max(questionariodiagpresc.IdQuestionarioDiagPresc) AS IdQuestionarioDiagPresc, form.IdFormulario, questionario.IdPaciente, DATE_FORMAT(questionario.DataRealizado, '%d/%m/%Y') AS dataFormatada, Descricao, func.Nome
                                                     FROM Questionario 
                                                     INNER JOIN formulario as form on form.IdFormulario = questionario.IdFormulario 
                                                     INNER JOIN funcionario as func on func.IdFuncionario = questionario.IdFuncionario
-                                                    INNER JOIN questionariodiagpresc on questionariodiagpresc.IdQuestionario = questionario.IdQuestionario
-                                                    WHERE questionario.IdPaciente =  '$idPaciente'");
+                                                    LEFT JOIN questionariodiagpresc on questionariodiagpresc.IdQuestionario = questionario.IdQuestionario
+                                                    WHERE questionario.IdPaciente = $idPaciente GROUP BY questionario.IdQuestionario ORDER BY dataFormatada DESC");
             $res = $listarQuestFormFunc->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }

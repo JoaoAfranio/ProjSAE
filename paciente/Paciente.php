@@ -57,7 +57,7 @@
           <div class="card">
             <div class="card-body">
               <h4>Paciente: <small class="text-muted"><?php echo $paciente['Nome'];?></small> </h4>
-              <h5>Codigo do paciente: <small class="text-muted"><?php echo $paciente['CodigoPaciente'];?></small> </h5>
+              <h5>Prontuário: <small class="text-muted"><?php echo $paciente['CodigoPaciente'];?></small> </h5>
               <h5>Tipo do paciente: <small class="text-muted"><?php echo $paciente['Descricao'];?></small> </h5>
               <h5>Unidade de internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
               <br>
@@ -74,7 +74,8 @@
                             <th>Ordem #</th>
                             <th>Data Realizada</th>
                             <th>Responsável</th>
-                            <th>Gerar PDF</th>
+                            <th>Exame Físico</th>
+                            <th>Rotina</th>
                         </tr>
 
                       </thead>
@@ -83,15 +84,27 @@
                     $ordem = 0;
                     $idPaciente = $paciente['IdPaciente'];
                     foreach($resQuestionario as $questionario){
-                      $ordem++;
+                      if(($questionario["IdFormulario"] == 10) || ($questionario["IdFormulario"] == 11) || ($questionario["IdFormulario"] == 12)){
+                      $ordem++; 
                                         ?>        
                         <tr>
                             <td><?php echo $ordem;?></td>
                             <td><?php echo $questionario['dataFormatada'];?></td>
                             <td><?php echo $questionario['Nome'];?></td>
-                            <td><a href="RelatorioPaciente.php?idPaciente=<?php echo $paciente['IdPaciente']; ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>&idQuestionarioDiagPresc=<?php echo $questionario['IdQuestionarioDiagPresc'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a></td>
+                            <td><a href="RelatorioExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente']; ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a></td>
+                            <?php if($questionario['IdQuestionarioDiagPresc'] != NULL){?>
+                            <td>
+                            <a href="RelatorioRotina.php?idPaciente=<?php echo $paciente['IdPaciente']; ?>&idQuestionarioDiagPresc=<?php echo $questionario['IdQuestionarioDiagPresc'];?>"><i class="mdi mdi-file menu-icon"></i> Gerar PDF</a>
+                            <a href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'] ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>"><i class="mdi mdi-plus menu-icon"></i> Cadastrar</a>
+                            </td>
+                            <?php }else{
+                            ?>
+                            <td><a href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'] ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>"><i class="mdi mdi-plus menu-icon"></i> Cadastrar</a></td>
+                            
+                            <?php } ?>
                         </tr>
-                    <?php } ?>
+                    <?php }
+                    } ?>
                       </tbody>
                     </table>
                   </div>
@@ -129,41 +142,5 @@
   <!-- End custom js for this page-->
 </body>
 
-
-<div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel-2">Gerar PDF</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form method="post" action="RelatorioPaciente.php">
-        <label>Escolha o exame físico</label><br>
-        <select name="idQuestionario">
-        <?php 
-        foreach($resQuestionario as $questionario){?>
-        <option value="<?php echo $questionario['IdQuestionario'];?>"><?php echo $questionario['dataFormatada'];?></option>
-        <?php } ?>
-        </select>
-        <br><br>
-        <label>Escolha o formulário de prescrição.</label><br>
-        <select name="idQuestionarioDiagPresc">
-        <?php 
-        foreach($resQuestionarioDiagPresc as $questionarioDiagPresc){?>
-        <option value="<?php echo $questionarioDiagPresc['IdQuestionarioDiagPresc'];?>"><?php echo $questionarioDiagPresc['dataFormatada'];?></option>
-        <?php } ?>
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Gerar</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
 
 </html>

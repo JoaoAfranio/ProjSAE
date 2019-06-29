@@ -62,7 +62,7 @@
                         </div>
                         <div class="content clearfix">
                         <h3 id="steps-uid-0-h-1" tabindex="-1" class="title current">Prescrição</h3>
-                          <section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body current" style="left: 0px;" aria-hidden="false">
+                          <section style="overflow: auto;" id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body current" style="left: 0px;" aria-hidden="false">
                           <?php 
                                   // Busco todos os diagnosticos do questionario
                                   foreach($resQuestionarioDiagnosticos as $diagnostico){

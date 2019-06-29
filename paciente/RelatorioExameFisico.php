@@ -13,26 +13,15 @@
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/QuestionarioDiagPrescModel.php";
 
     $idQuestionario = $_GET["idQuestionario"];
-    $idQuestionarioDiagPresc = $_GET["idQuestionarioDiagPresc"];
     $idPaciente = $_GET["idPaciente"];
 
 
-
-    $questionarioDiagPrescModel = new QuestionarioDiagPrescModel();
     $respostaAbertaModel = new RespostaAbertaModel();
     $respostaUnicaModel = new RespostaUnicaModel();
     $respostaMultiplaModel = new RespostaMultiplaModel();
     $pacienteModel = new PacienteModel();
     $questionarioModel = new QuestionarioModel();
 
-
-    $resDiagnosticos = $questionarioDiagPrescModel->listarTodosDiagnosticosIdQuestionario($idQuestionarioDiagPresc);
-
-    $resPrescricoes = $questionarioDiagPrescModel->listarTodasPrescricoesIdQuestionario($idQuestionarioDiagPresc);
-
-    $resResultados = $questionarioDiagPrescModel->listarTodosResultadosIdQuestionario($idQuestionarioDiagPresc);
-    
-    $resQuestionarioDiagPresc = $questionarioDiagPrescModel->listarID($idQuestionarioDiagPresc);
     
     //Listar todas avaliacoes respondidas
     $resSelectAvaliacao = $questionarioModel->listarTodasAvaliacoes($idQuestionario);
@@ -92,10 +81,6 @@
       <div class="col-lg-12">
                   <div class="card px-2">
                       <div class="card-body">
-                          <div class="container-fluid">
-                            <h3 class="text-right my-5">Questionário Nº <?php echo $idQuestionario;?></h3>
-                            <hr>
-                          </div>
                           <div class="container-fluid d-flex justify-content-between">
                           <div class="row">
                             <div class="col-md-12 pl-0">
@@ -104,7 +89,7 @@
                               ?>
                               
                               <p class="mt-5 mb-2"><b>Paciente <u><?php echo $paciente['Nome'];?></u></b></p>
-                              <p>Codigo Paciente: <?php echo $paciente['CodigoPaciente'];?>,<br>Unidade de Internação: <?php echo $paciente['NomeUnidade'];?>,<br>Tipo Paciente: <?php echo $paciente['Descricao'];?></p>
+                              <p>Prontuário: <?php echo $paciente['CodigoPaciente'];?>,<br>Unidade de Internação: <?php echo $paciente['NomeUnidade'];?>,<br>Tipo Paciente: <?php echo $paciente['Descricao'];?></p>
                             </div>
                           </div>
                             <?php } ?>
@@ -131,91 +116,7 @@
                           <?php } ?>
 
 
-
-                        <div class="col-md-6 grid-margin stretch-card">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5>Evolução</h5>
-                              <p class="text-muted"></i><?php 
-                              if($resQuestionarioDiagPresc["Evolucao"] == " "){
-                                echo "Nenhuma evolução aparente";
-                              }else{
-                                echo $resQuestionarioDiagPresc["Evolucao"];
-                              }
-                              ?></p>
-                            </div>
-                          </div>
-                        </div>
                         
-                      <?php if(count($resPrescricoes) > 0){?>
-                        <div class="col-12">
-                          <div>
-                            <table class="table">
-                              <thead>
-
-                                <tr>
-                                    <th>#</th>
-                                    <th>Prescrição</th>
-                                    <th>Rotina</th>
-
-                                </tr>
-
-                              </thead>
-                              <tbody>
-                            <?php
-                            $ordem = 0;
-                            foreach($resPrescricoes as $prescricao){
-                              $ordem++;
-                                                ?>        
-                                <tr>
-                                    <td><?php echo $ordem;?></td>
-                                    <td><?php echo $prescricao['Descricao'];?></td>
-                                    <td><?php echo $prescricao['Rotina'];?> em <?php echo $prescricao['Rotina'];?></td>
-                                </tr>
-                            <?php } ?>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      <?php } ?>
-
-                      <?php if(count($resDiagnosticos) > 0){?>
-                        <div class="col-12">
-                          <div>
-                            <table class="table">
-                              <thead>
-
-                                <tr>
-                                    <th>#</th>
-                                    <th>Diagnóstico</th>
-                                    <th>Resultado</th>
-
-                                </tr>
-
-                              </thead>
-                              <tbody>
-                            <?php
-                            $ordem = 0;
-                            foreach($resDiagnosticos as $diagnostico){
-                              $ordem++;
-                                                ?>        
-                                <tr>
-                                    <td><?php echo $ordem;?></td>
-                                    <td><?php echo $diagnostico['Descricao'];?></td>
-                                    <td><?php                   
-                                    foreach($resResultados as $resultado){
-                                      if($resultado['IdDiagnostico'] == $diagnostico['IdDiagnostico']){
-                                        echo "<p><i class='mdi mdi-check menu-icon'></i>" . $resultado['resDescricao'] . "</p><br>";
-                                      }
-                                    }
-                                    ?></td>
-                                </tr>
-                            <?php } ?>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      <?php } ?>
                         <!-- ------------------------------------------------------------------------------------------------- -->
                         <!-- ------------------------------------------------------------------------------------------------- -->
                         </div>
@@ -251,30 +152,30 @@
     function buscarQuestoes(){
       <?php foreach($resQuestaoAberta as $questaoAberta){?>
         $('#' + <?php echo $questaoAberta['IdAvaliacao']?>).append(
-          '<div class="form-group">' + 
-            '<h6 style="color:#0f6c8f !important;"><?php echo $questaoAberta['Descricao']?>:</h6>' + 
-            '<p class="text-muted"><?php echo $questaoAberta['DescricaoRespostaAberta']?></p>' + 
+          '<div class="col-md-12">' + 
+            '<h6 style="display:inline;color:#0f6c8f !important;"><?php echo $questaoAberta['Descricao']?>:</h6>' + 
+            '<p style="display:inline;" class="text-muted"><?php echo $questaoAberta['DescricaoRespostaAberta']?></p>' + 
           '</div>');
       <?php } ?>
 
       <?php foreach($resQuestaoUnica as $questaoUnica){?>
         $('#' + <?php echo $questaoUnica['IdAvaliacao']?>).append(
-          '<div class="form-group">' + 
-            '<h6 style="color:#0f6c8f !important;"><?php echo $questaoUnica['Descricao']?>:</h6>' + 
-            '<p class="text-muted"><i class="mdi mdi-check menu-icon"><?php echo $questaoUnica['descricaoAfirmativa']?></p>' + 
+          '<div class="col-md-12">' + 
+            '<h6 style="display:inline;color:#0f6c8f !important;"><?php echo $questaoUnica['Descricao']?>:</h6>' + 
+            '<p style="display:inline;" class="text-muted"><i class="mdi mdi-check menu-icon"><?php echo $questaoUnica['descricaoAfirmativa']?></p>' + 
           '</div>');
       <?php } ?>
 
       <?php foreach($resSelectQuestoesMultipla as $questoesMultipla){?>
         $('#' + <?php echo $questoesMultipla['IdAvaliacao']?>).append(
-          '<div class="form-group" id="questao<?php echo $questoesMultipla['IdQuestao'];?>">' + 
-            '<h6 style="color:#0f6c8f !important;"><?php echo $questoesMultipla['Descricao']?>:</h6>' + 
+          '<div class="col-md-12" id="questao<?php echo $questoesMultipla['IdQuestao'];?>">' + 
+            '<h6 style="display:inline;color:#0f6c8f !important;"><?php echo $questoesMultipla['Descricao']?>:</h6>' + 
           '</div>');
       <?php } ?>
 
       <?php foreach($resQuestaoMultipla as $questaoMultipla){?>
         $('#questao' + <?php echo $questaoMultipla['IdQuestao']?>).append(
-          '<p class="text-muted"><i class="mdi mdi-check menu-icon"></i><?php echo $questaoMultipla['descricaoAfirmativa']?></p>');
+          '<p style="display:inline;" class="text-muted"><i class="mdi mdi-check menu-icon"></i><?php echo $questaoMultipla['descricaoAfirmativa']?></p>');
       <?php } ?>
     }
   </script>

@@ -80,19 +80,23 @@
                             <p class="page-description mt-1 w-75 text-muted">Unidade de Internação: <?php echo $nomeUnidade?></p>
                             <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../paciente/Paciente.php?idPaciente=<?php echo $pessoa['IdPaciente'];?>"><i class="mdi mdi-account-circle menu-icon"></i> Detalhar Paciente</a>
                           </div>
-                          <div class="col-6">
-                            <p class="d-block h4 mb-0" href="#">Diagnósticos:</p>
-                            <ul class="list-arrow">
-                            <?php 
-
-                            $resDiagnostico = $questionarioDiagPrescModel->listarTodosDiagnosticos($pessoa['IdPaciente']);
-
-                            foreach($resDiagnostico as $diagnostico){;?>
-                              
-                              <li class="page-description mt-1 w-75 text-muted"><?php echo $diagnostico['Descricao'];?></li>
-                            <?php }?>
-                            </ul>
-                          </div>
+                          <?php $resIdQuestionarioDiagPresc = $questionarioDiagPrescModel->listarUltimo($pessoa['IdPaciente']);
+                            if($resIdQuestionarioDiagPresc['max(IdQuestionarioDiagPresc)'] !=  NULL){
+                             
+                          ?>
+                            <div class="col-6">
+                              <p class="d-block h4 mb-0" href="#">Diagnósticos:</p>
+                              <ul class="list-arrow">
+                              <?php 
+                                $resDiagnostico = $questionarioDiagPrescModel->listarTodosDiagnosticosIdQuestionario($resIdQuestionarioDiagPresc['max(IdQuestionarioDiagPresc)']);
+                                foreach($resDiagnostico as $diagnostico){
+                              ?>
+                                
+                                <li class="page-description mt-1 w-75 text-muted"><?php echo $diagnostico['Descricao'];?></li>
+                              <?php }?>
+                              </ul>
+                            </div>
+                                <?php } ?>
                         </div>
                       </div>
                     </div>

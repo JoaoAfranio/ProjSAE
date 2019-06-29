@@ -83,6 +83,7 @@
                                     ?>
                                     <p><?php echo $resPrescricao['Descricao']?></p>
                                     <select name="prescricao<?php echo $prescricao["IdPrescricao"] ?>">               
+                                    <option value="Rotina">Rotina</option>
                                     <option value="0:30 Hr">0:30 Hr</option>
                                     <option value="1:00 Hr">1:00 Hr</option>
                                     <option value="1:30 Hr">1:30 Hr</option>
