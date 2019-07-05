@@ -26,6 +26,17 @@
 
 	}
 
+	if($acao == "editar"){
+
+		$idResultado = $_POST["idResultado"];
+		$descricao = $_POST["descricao"];
+
+		$resultadoModel->editar($idResultado, $descricao);
+
+		echo "<script>location.href='../resultado/resultado.php?editar=sucesso';</script>";
+
+	}
+
     if($acao = "deletarDiagnostico"){
         $idResultado = $_POST["idResultado"];
         $idDiagnostico 	= $_POST["idDiagnostico"];

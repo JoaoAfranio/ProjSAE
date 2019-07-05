@@ -25,6 +25,17 @@
 
 	}
 
+	if($acao == "editar"){
+
+		$idAfirmativa = $_POST["idAfirmativa"];
+		$descricao = $_POST["descricao"];
+
+		$afirmativaModel->editar($idAfirmativa, $descricao);
+
+		echo "<script>location.href='../afirmativa/Afirmativa.php?editar=sucesso';</script>";
+
+	}
+
 
 
 	

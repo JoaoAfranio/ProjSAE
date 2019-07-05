@@ -26,6 +26,16 @@
 
 	}
 
+	if($acao == "editar"){
+
+		$idQuestao = $_POST["idQuestao"];
+		$descricao = $_POST["descricao"];
+
+		$questaoModel->editar($idQuestao, $descricao);
+
+		echo "<script>location.href='../questao/questao.php?editar=sucesso';</script>";
+
+	}
 
 
 	

@@ -25,6 +25,17 @@
 
 	}
 
+	if($acao == "editar"){
+
+		$idAvaliacao = $_POST["idAvaliacao"];
+		$descricao = $_POST["descricao"];
+
+		$avaliacaoModel->editar($idAvaliacao, $descricao);
+
+		echo "<script>location.href='../avaliacao/Avaliacao.php?editar=sucesso';</script>";
+
+	}
+
 
 
 	

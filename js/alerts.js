@@ -76,7 +76,33 @@
         }
       })
 
-    } else if (type === 'auto-close') {
+    } else if (type === 'edit-success-message') {
+      swal({
+        title: 'Dado Editado!',
+        text: 'Dados editado com sucesso',
+        icon: 'success',
+        button: {
+          text: "Continuar",
+          value: true,
+          visible: true,
+          className: "btn btn-primary"
+        }
+      })
+
+    } else if (type === 'edit-error-message') {
+      swal({
+        title: 'Erro ao editar!',
+        text: 'Desculpe, não foi possível editar os dados',
+        icon: 'error',
+        button: {
+          text: "Continuar",
+          value: true,
+          visible: true,
+          className: "btn btn-primary"
+        }
+      })
+      
+    }else if (type === 'auto-close') {
       swal({
         title: 'Auto close alert!',
         text: 'I will close in 2 seconds.',

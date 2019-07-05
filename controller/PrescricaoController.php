@@ -25,6 +25,17 @@
 
 	}
 
+	if($acao == "editar"){
+
+		$idPrescricao = $_POST["idPrescricao"];
+		$descricao = $_POST["descricao"];
+
+		$prescricaoModel->editar($idPrescricao, $descricao);
+
+		echo "<script>location.href='../prescricao/Prescricao.php?editar=sucesso';</script>";
+
+	}
+
 
 
 	

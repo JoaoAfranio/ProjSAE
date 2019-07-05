@@ -22,6 +22,15 @@
 
 		 }
 
+		 public function editar($idResultado, $descricao){
+
+			$editar = $this->bd->prepare("UPDATE resultado SET Descricao = :descricao WHERE IdResultado = :idResultado");
+			$editar->bindParam(":descricao", $descricao);
+			$editar->bindParam(":idResultado", $idResultado);
+			$editar->execute();
+
+		}
+
 		 public function excluir($idResultado){
 		 	$excluir = $this->bd->prepare("DELETE from resultado where idResultado = :idResultado");
 		 	$excluir->bindParam(":idResultado", $idResultado);

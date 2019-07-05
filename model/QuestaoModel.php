@@ -21,6 +21,15 @@
 		 	$insercao->execute();
 
 		 }
+		 
+		 public function editar($idQuestao, $descricao){
+
+			$editar = $this->bd->prepare("UPDATE questao SET Descricao = :descricao WHERE IdQuestao = :idQuestao");
+			$editar->bindParam(":descricao", $descricao);
+			$editar->bindParam(":idQuestao", $idQuestao);
+			$editar->execute();
+
+		}
 
 		 public function excluir($idQuestao){
 		 	$excluir = $this->bd->prepare("DELETE from questao where idQuestao = :idQuestao");

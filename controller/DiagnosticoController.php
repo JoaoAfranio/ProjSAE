@@ -26,6 +26,17 @@
 
 	}
 
+	if($acao == "editar"){
+
+		$idDiagnostico = $_POST["idDiagnostico"];
+		$descricao = $_POST["descricao"];
+
+		$diagnosticoModel->editar($idDiagnostico, $descricao);
+
+		echo "<script>location.href='../diagnostico/diagnostico.php?editar=sucesso';</script>";
+
+	}
+
 
 
 	

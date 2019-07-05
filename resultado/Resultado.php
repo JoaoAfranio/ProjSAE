@@ -23,6 +23,16 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/sae/model/ResultadoModel.php";
       }
   }
 
+  if(isset($_GET['editar'])) {
+    $deletar = $_GET['editar'];
+      if($deletar == "sucesso"){
+          echo "onload=showSwal('edit-success-message')";
+      }else{
+          echo "onload=showSwal('edit-error-message')";
+      }
+  }
+
+
 
 ?>
 >
