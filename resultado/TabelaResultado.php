@@ -30,14 +30,14 @@
                             <td><?php echo $ordem;?></td>
                             <td><?php echo $res['Descricao'];?></td>
                             <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $res['IdResultado'];?>">
                                 Editar
                             </button>
 
                             <!-- Modal Editar -->
                             <form class="forms-sample" method="post" action="../controller/ResultadoController.php?acao=editar">
                             <input type="hidden" name="idResultado" value="<?php echo $res['IdResultado'];?>"> 
-                                <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="modal<?php echo $res['IdResultado'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">

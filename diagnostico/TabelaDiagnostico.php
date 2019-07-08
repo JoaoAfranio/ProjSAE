@@ -86,14 +86,14 @@
                                 </form>
                             </td>
                             <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $diag['IdDiagnostico'];?>">
                                 Editar
                             </button>
 
                             <!-- Modal Editar -->
                             <form class="forms-sample" method="post" action="../controller/DiagnosticoController.php?acao=editar">
                             <input type="hidden" name="idDiagnostico" value="<?php echo $diag['IdDiagnostico'];?>"> 
-                                <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="modal<?php echo $diag['IdDiagnostico'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
