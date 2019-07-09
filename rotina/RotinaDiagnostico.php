@@ -61,7 +61,7 @@
                         <div class="content clearfix">
                           <h3 id="steps-uid-0-h-0" tabindex="-1" class="title current">Diagnóstico</h3>
                           <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false" style="left: 0px;overflow-y:auto">
-                            <select name="diagnosticos[]" multiple>
+                          <select name="diagnosticos[]" multiple="" style="height: 100%;">
                             <?php foreach($resDiagnostico as $diagnostico){ ?>
                               <option value="<?php echo $diagnostico["IdDiagnostico"];?>"> <?php echo $diagnostico["Descricao"];?> </option>
                             <?php } ?>

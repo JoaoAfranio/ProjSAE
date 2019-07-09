@@ -42,6 +42,7 @@
     if($acao == "cadastrarPrescricao"){
         $idQuestionarioDiagPresc = $_POST["idQuestionario"];
         $idPaciente = $_POST["idPaciente"];
+
         
        if(isset($_POST["diagnosticos"])) {
             
@@ -50,13 +51,17 @@
             
 
             if(count($idDiagnosticos) == 2){
-                $idDiagnostico =  $diagnosticos[-2];
+                $idDiagnosticos =  array_filter($idDiagnosticos, function($value) {
+                    return !empty($value);
+                  });
 
-                foreach($_POST["diagnostico" . $idDiagnostico] as $idPrescricao){
-                    $pacientePrescricaoModel->inserir($idDiagnostico, $idPrescricao, $idQuestionarioDiagPresc);
+                foreach($idDiagnosticos as $idDiag){
+                    $idDiagnostico = trim($idDiag); 
+                    foreach($_POST["diagnostico" . $idDiagnostico] as $idPrescricao){
+                        $pacientePrescricaoModel->inserir($idDiagnostico, $idPrescricao, $idQuestionarioDiagPresc);
+                    }
                     break;
                 }
-              
             }else{
                 foreach($idDiagnosticos as $diag){
                     $idDiagnostico = trim($diag); 
@@ -68,7 +73,7 @@
                 }
             }
         }
-        echo "<script>location.href='../rotina/RotinaPrescricaoRot.php?idQuestionario=". $idQuestionarioDiagPresc ."&idPaciente=". $idPaciente ."';</script>";
+      echo "<script>location.href='../rotina/RotinaPrescricaoRot.php?idQuestionario=". $idQuestionarioDiagPresc ."&idPaciente=". $idPaciente ."';</script>";
     }
 
     if($acao == "cadastrarPrescricaoRot"){

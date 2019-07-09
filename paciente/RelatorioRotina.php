@@ -234,6 +234,27 @@
       </div>
       <!-- main-panel ends -->
     </div>
+    <br><br><br>
+      <div class="row">
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-3">
+          <hr style="border-color:black;">
+          </div>
+          <div class="col-lg-3">
+          <hr style="border-color:black;">
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-3">
+          <p style="text-align:center;">Enfermeiro</p>
+          </div>
+          <div class="col-lg-3">
+          <p style="text-align:center;">Técnico de enfermagem</p>
+          </div>
+      </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
