@@ -30,7 +30,7 @@ $resTipoPaciente = $tipoPaciente->listarTodos();
 
                     <form action="../controller/PacienteController.php?acao=cadastrar" method="post" class="forms-sample">
                       <div class="form-group">
-                        <label for="inputCodigoPaciente">Código do paciente</label>
+                        <label for="inputCodigoPaciente">Prontuário</label>
                         <input required type="text" class="form-control" name="codigoPaciente" placeholder="Código do paciente">
                       </div>
                       <div class="form-group">

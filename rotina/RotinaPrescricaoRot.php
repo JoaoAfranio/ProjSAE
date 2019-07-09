@@ -3,7 +3,7 @@
 <?php 
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
 
-
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacientePrescricaoModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PrescricaoModel.php";
 
@@ -15,6 +15,9 @@
 
     $pacientePrescricaoModel = new PacientePrescricaoModel();
     $prescricaoModel = new PrescricaoModel();
+
+    $pacienteModel = new PacienteModel();
+    $resPaciente = $pacienteModel->listarID($idPaciente);
 
     $resQuestionarioPresc = $pacientePrescricaoModel->listarTodosPorQuestionarioDiagPresc($idQuestionario);
 
@@ -31,8 +34,8 @@
                 <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
-                      <h4>Paciente: <small class="text-muted">Nome do paciente</small> </h4>
-                      <h5>Código do Paciente: <small class="text-muted">Codigo do paciente</small> </h5>
+                    <h4>Paciente: <small class="text-muted"><?php echo $resPaciente['Nome'];?></small> </h4>
+                      <h5>Prontuário: <small class="text-muted"><?php echo $resPaciente['CodigoPaciente'];?></small> </h5>
                       <br>
                       <form id="form-rotina" method="POST" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarPrescricaoRot">
                       <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario;?>">
@@ -54,7 +57,7 @@
                                 </li>
                                 <li role="tab" class="disabled last" aria-disabled="true">
                                     <a id="steps-uid-0-t-3"  aria-controls="steps-uid-0-p-3">
-                                    <span class="number">4.</span> Evolução</a>
+                                    <span class="number">4.</span> Observação</a>
                                 </li>
                             </ul>
                         </div>

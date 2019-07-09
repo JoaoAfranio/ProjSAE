@@ -31,7 +31,7 @@
                   <div class="card">
                     <div class="card-body">
                       <h4>Paciente: <small class="text-muted"><?php echo $paciente['Nome'];?></small> </h4>
-                      <h5>Código do Paciente: <small class="text-muted"><?php echo $paciente['CodigoPaciente'];?></small> </h5>
+                      <h5>Prontuário: <small class="text-muted"><?php echo $paciente['CodigoPaciente'];?></small> </h5>
                       <h5>Unidade de Internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
                       <br>
                       <form id="form-rotina" method="post" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarDiagnostico">
@@ -54,7 +54,7 @@
                                 </li>
                                 <li role="tab" class="disabled last" aria-disabled="true">
                                     <a id="steps-uid-0-t-3"  aria-controls="steps-uid-0-p-3">
-                                    <span class="number">4.</span> Evolução</a>
+                                    <span class="number">4.</span> Observação</a>
                                 </li>
                             </ul>
                         </div>
