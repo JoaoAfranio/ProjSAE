@@ -81,23 +81,7 @@
                           </div>
                         <div class="row">
                         <!-- ------------------------------------------------------------------------------------------------- -->
-                        <!-- ------------------------------------------------------------------------------------------------- -->   
-
-
-                        <div class="col-md-12 grid-margin stretch-card">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5>Evolução</h5>
-                              <p class="text-muted"></i><?php 
-                              if($resQuestionarioDiagPresc["Evolucao"] == " "){
-                                echo "Nenhuma evolução aparente";
-                              }else{
-                                echo $resQuestionarioDiagPresc["Evolucao"];
-                              }
-                              ?></p>
-                            </div>
-                          </div>
-                        </div>
+                        <!-- ------------------------------------------------------------------------------------------------- -->
                         
                       <?php if(count($resPrescricoes) > 0){?>
                         <div class="col-12">
@@ -108,7 +92,33 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Prescrição</th>
-                                    <th>Rotina</th>
+                                    <th>Horário</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    
 
                                 </tr>
 
@@ -129,6 +139,31 @@
                                               } ?>
                                     
                                     </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             <?php } ?>
                               </tbody>
@@ -180,6 +215,20 @@
                       </div>
                   </div>
               </div>
+              <div class="col-md-12 grid-margin stretch-card">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5>Observação</h5>
+                              <p class="text-muted"></i><?php 
+                              if($resQuestionarioDiagPresc["Evolucao"] == " "){
+                                echo "Nenhuma evolução aparente";
+                              }else{
+                                echo $resQuestionarioDiagPresc["Evolucao"];
+                              }
+                              ?></p>
+                            </div>
+                          </div>
+                        </div>
 
         <!-- content-wrapper ends -->
       </div>
