@@ -102,12 +102,11 @@
                             <?php }else{
                             ?>
                             <td><a href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'] ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>"><i class="mdi mdi-plus menu-icon"></i> Cadastrar</a></td>
-                            <td><a href="../controller/ExameFisicoController.php?acao=excluir&idQuestionario=<?php echo $questionario['IdQuestionario'];?>&idPaciente=<?php echo $paciente['IdPaciente'] ?>">Excluir</a></td>
                             <?php } ?>
+                            <td><a href="../controller/ExameFisicoController.php?acao=excluir&idQuestionario=<?php echo $questionario['IdQuestionario'];?>&idPaciente=<?php echo $paciente['IdPaciente'] ?>">Excluir</a></td>
                         </tr>
                     <?php }
                     } ?>
-                      </tbody>
                     </table>
                   </div>
                 </div>
