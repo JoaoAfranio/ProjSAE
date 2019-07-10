@@ -62,7 +62,7 @@
               <h5>Unidade de internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
               <h5>Data Internação: <small class="text-muted"><?php echo $paciente['dataFormatada'];?></small> </h5>
               <br>
-              <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../examefisico/ExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>&tipoPaciente=<?php echo $paciente['IdTipoPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Realizar Exame Físico</a>
+              <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../exameFisico/ExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>&tipoPaciente=<?php echo $paciente['IdTipoPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Realizar Exame Físico</a>
               
               <h4 style="margin-top: 20px;">Histórico do paciente</h4>
               <div class="row">
