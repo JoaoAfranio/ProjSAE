@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php 
+
+    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
     include $_SERVER["DOCUMENT_ROOT"] . "/sae/template/header.php";
 
     $idQuestionario = $_GET["idQuestionario"];
@@ -8,6 +10,11 @@
     if (isset($_GET["idPaciente"])) {
       $idPaciente = $_GET["idPaciente"];
     }
+
+
+
+    $pacienteModel = new PacienteModel();
+    $resPaciente = $pacienteModel->listarID($idPaciente);
 ?>
 
 
@@ -21,8 +28,8 @@
                 <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
-                      <h4>Paciente: <small class="text-muted">Nome do paciente</small> </h4>
-                      <h5>Código do Paciente: <small class="text-muted">Codigo do paciente</small> </h5>
+                    <h4>Paciente: <small class="text-muted"><?php echo $resPaciente['Nome'];?></small> </h4>
+                      <h5>Prontuário: <small class="text-muted"><?php echo $resPaciente['CodigoPaciente'];?></small> </h5>
                       <br>
                       <form id="form-rotina" method="post" action="../controller/QuestionarioDiagnosticoController.php?acao=cadastrarEvolucao">
                       <input type="hidden" name="idQuestionario" value="<?php echo $idQuestionario;?>">
@@ -44,14 +51,14 @@
                                 </li>
                                 <li role="tab" class="current last" aria-disabled="true">
                                     <a id="steps-uid-0-t-3"  aria-controls="steps-uid-0-p-3">
-                                    <span class="number">4.</span> Observação</a>
+                                    <span class="number">4.</span> Relatório de Alta</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="content clearfix">
-                        <h3 id="steps-uid-0-h-3" tabindex="-1" class="title current">Observação</h3>
+                        <h3 id="steps-uid-0-h-3" tabindex="-1" class="title current">Relatório de Alta</h3>
                           <section id="steps-uid-0-p-3" role="tabpanel" aria-labelledby="steps-uid-0-h-2" class="body current" style="left: 0px;" aria-hidden="false">
-                            <h3>Observação</h3>
+                            <h3>Relatório de Alta</h3>
                             <div class="form-group">
                               <textarea name="evolucao" class="form-control" rows="10"></textarea>
                             </div>

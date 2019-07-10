@@ -47,7 +47,7 @@
          }
 
          public function listarResposta($idAplicacao,$idAvaliacao,$idQuestao,$idQuestionario){
-            $listarResposta = $this->bd->prepare("SELECT * FROM Resposta WHERE IdAplicacao = '$idAplicacao' 
+            $listarResposta = $this->bd->prepare("SELECT * FROM resposta WHERE IdAplicacao = '$idAplicacao' 
             AND IdAvaliacao = '$idAvaliacao' AND IdQuestao = '$idQuestao' AND IdQuestionario = '$idQuestionario'");
 
             $listarResposta->execute();

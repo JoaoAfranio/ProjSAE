@@ -15,7 +15,7 @@
 
 		 public function inserir($dataRealizado, $evolucao, $idPaciente, $idFuncionario, $idQuestionario){
 
-		 	$insercao = $this->bd->prepare("INSERT INTO QuestionarioDiagPresc (DataRealizado, Evolucao, IdPaciente, IdFuncionario, IdQuestionario) VALUES (:dataRealizado, :evolucao, :idPaciente, :idFuncionario, :idQuestionario)");
+		 	$insercao = $this->bd->prepare("INSERT INTO questionariodiagpresc (DataRealizado, Evolucao, IdPaciente, IdFuncionario, IdQuestionario) VALUES (:dataRealizado, :evolucao, :idPaciente, :idFuncionario, :idQuestionario)");
 			$insercao->bindParam(":dataRealizado", $dataRealizado);
 			$insercao->bindParam(":evolucao", $evolucao);
 			$insercao->bindParam(":idPaciente", $idPaciente);
@@ -26,20 +26,20 @@
 		 }
 
 		 public function excluir($idQuestionarioDiagPresc){
-		 	$excluir = $this->bd->prepare("DELETE from QuestionarioDiagPresc where idQuestionarioDiagPresc = :idQuestionarioDiagPresc");
+		 	$excluir = $this->bd->prepare("DELETE from questionariodiagpresc where idQuestionarioDiagPresc = :idQuestionarioDiagPresc");
 		 	$excluir->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc);
 		 	$excluir->execute();
 		 }
 
 		 public function listarTodos(){
-		 	$listar = $this->bd->query("SELECT * from QuestionarioDiagPresc");
+		 	$listar = $this->bd->query("SELECT * from questionariodiagpresc");
 		 	$res = $listar->fetchAll(PDO::FETCH_ASSOC);
 		 	return $res;
          }
          
          public function listarID($idQuestionarioDiagPresc){
             
-            $listarUm = $this->bd->prepare("SELECT * from QuestionarioDiagPresc where idQuestionarioDiagPresc = :idQuestionarioDiagPresc");
+            $listarUm = $this->bd->prepare("SELECT * from questionariodiagpresc where idQuestionarioDiagPresc = :idQuestionarioDiagPresc");
             $listarUm->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc, PDO::PARAM_INT);
             $listarUm->execute();
 
@@ -48,7 +48,7 @@
 		 }
 
 		public function listarUltimo($idPaciente){
-			$listarUltimo = $this->bd->prepare("SELECT max(IdQuestionarioDiagPresc) from QuestionarioDiagPresc where idPaciente = :idPaciente");
+			$listarUltimo = $this->bd->prepare("SELECT max(IdQuestionarioDiagPresc) from questionariodiagpresc where idPaciente = :idPaciente");
             $listarUltimo->bindParam(":idPaciente", $idPaciente, PDO::PARAM_INT);
 			$listarUltimo->execute();
 			
@@ -59,7 +59,7 @@
 		        
         public function alterarEvolucao($idQuestionario, $evolucao){
 
-            $alterarEvolucao = $this->bd->prepare("UPDATE QuestionarioDiagPresc SET Evolucao = :evolucao WHERE IdQuestionarioDiagPresc = :idQuestionario");
+            $alterarEvolucao = $this->bd->prepare("UPDATE questionariodiagpresc SET Evolucao = :evolucao WHERE IdQuestionarioDiagPresc = :idQuestionario");
             $alterarEvolucao->bindParam(":idQuestionario", $idQuestionario);
             $alterarEvolucao->bindParam(":evolucao", $evolucao);
             $alterarEvolucao->execute();
@@ -70,14 +70,14 @@
 			$listarTodosDiagnosticos = $this->bd->query("SELECT diag.Descricao FROM diagnostico as diag 
 														INNER JOIN pacientediagnostico as pacDiag on pacDiag.IdDiagnostico = diag.IdDiagnostico
 														INNER JOIN questionariodiagpresc as qDiagPres on qDiagPres.idQuestionarioDiagPresc = pacDiag.idQuestionarioDiagPresc
-														INNER JOIN Paciente as pac on qDiagPRes.IdPaciente = pac.IdPaciente
+														INNER JOIN paciente as pac on qDiagPRes.IdPaciente = pac.IdPaciente
 														WHERE pac.IdPaciente = " . $idPaciente);
 			$res = $listarTodosDiagnosticos->fetchAll(PDO::FETCH_ASSOC);
 			return $res;
 		}
 
 		public function listarTodosPorPaciente($idPaciente){
-			$listarTodosPorPaciente = $this->bd->prepare("SELECT *, DATE_FORMAT(DataRealizado, '%d/%m/%Y') AS dataFormatada from QuestionarioDiagPresc where idPaciente = :idPaciente");
+			$listarTodosPorPaciente = $this->bd->prepare("SELECT *, DATE_FORMAT(DataRealizado, '%d/%m/%Y') AS dataFormatada from questionariodiagpresc where idPaciente = :idPaciente");
             $listarTodosPorPaciente->bindParam(":idPaciente", $idPaciente, PDO::PARAM_INT);
 			$listarTodosPorPaciente->execute();
 			

@@ -10,7 +10,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaAbertaModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaUnicaModel.php";
     require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaMultiplaModel.php";
-    require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/QuestionarioDiagPrescModel.php";
+
 
     $idQuestionario = $_GET["idQuestionario"];
     $idPaciente = $_GET["idPaciente"];
@@ -22,6 +22,9 @@
     $pacienteModel = new PacienteModel();
     $questionarioModel = new QuestionarioModel();
 
+
+    //Listar Dados
+    $resQuestionario = $questionarioModel->listarID($idQuestionario);
     
     //Listar todas avaliacoes respondidas
     $resSelectAvaliacao = $questionarioModel->listarTodasAvaliacoes($idQuestionario);
@@ -89,7 +92,10 @@
                               ?>
                               
                               <p class="mt-5 mb-2"><b>Paciente <u><?php echo $paciente['Nome'];?></u></b></p>
-                              <p>Prontuário: <?php echo $paciente['CodigoPaciente'];?>,<br>Unidade de Internação: <?php echo $paciente['NomeUnidade'];?>,<br>Tipo Paciente: <?php echo $paciente['Descricao'];?></p>
+                              <p>Prontuário: <?php echo $paciente['CodigoPaciente'];?>,<br>
+                                 Unidade de Internação: <?php echo $paciente['NomeUnidade'];?>,<br>
+                                 Tipo Paciente: <?php echo $paciente['Descricao'];?><br>
+                                 Data da avaliação: <?php echo $resQuestionario['dataFormatada'];?></p>
                             </div>
                           </div>
                             <?php } ?>
@@ -130,24 +136,18 @@
     </div>
     <br><br><br>
       <div class="row">
-          <div class="col-lg-3">
-          </div>
-          <div class="col-lg-3">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4">
           <hr style="border-color:black;">
           </div>
-          <div class="col-lg-3">
-          <hr style="border-color:black;">
-          </div>
+          <div class="col-lg-4"></div>
       </div>
       <div class="row">
-          <div class="col-lg-3">
-          </div>
-          <div class="col-lg-3">
+          
+          <div class="col-lg-12">
           <p style="text-align:center;">Enfermeiro</p>
           </div>
-          <div class="col-lg-3">
-          <p style="text-align:center;">Técnico de enfermagem</p>
-          </div>
+
       </div>
     </div>
     <!-- page-body-wrapper ends -->

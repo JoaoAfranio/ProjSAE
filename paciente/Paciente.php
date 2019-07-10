@@ -60,6 +60,7 @@
               <h5>Prontuário: <small class="text-muted"><?php echo $paciente['CodigoPaciente'];?></small> </h5>
               <h5>Tipo do paciente: <small class="text-muted"><?php echo $paciente['Descricao'];?></small> </h5>
               <h5>Unidade de internação: <small class="text-muted"><?php echo $paciente['NomeUnidade'];?></small> </h5>
+              <h5>Data Internação: <small class="text-muted"><?php echo $paciente['dataFormatada'];?></small> </h5>
               <br>
               <a class="mBottom10 buttonPesqPaciente btn btn-primary" href="../examefisico/ExameFisico.php?idPaciente=<?php echo $paciente['IdPaciente'];?>&tipoPaciente=<?php echo $paciente['IdTipoPaciente'];?>"><i class="mdi mdi-file menu-icon"></i> Realizar Exame Físico</a>
               
@@ -76,6 +77,7 @@
                             <th>Responsável</th>
                             <th>Exame Físico</th>
                             <th>Rotina</th>
+                            <th>Excluir</th>
                         </tr>
 
                       </thead>
@@ -100,7 +102,7 @@
                             <?php }else{
                             ?>
                             <td><a href="../rotina/RotinaDiagnostico.php?idPaciente=<?php echo $paciente['IdPaciente'] ?>&idQuestionario=<?php echo $questionario['IdQuestionario'];?>"><i class="mdi mdi-plus menu-icon"></i> Cadastrar</a></td>
-                            
+                            <td><a href="../controller/ExameFisicoController.php?acao=excluir&idQuestionario=<?php echo $questionario['IdQuestionario'];?>&idPaciente=<?php echo $paciente['IdPaciente'] ?>">Excluir</a></td>
                             <?php } ?>
                         </tr>
                     <?php }

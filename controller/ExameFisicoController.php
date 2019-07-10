@@ -12,7 +12,6 @@ $respostaMultiplaModel = new RespostaMultiplaModel();
 $questionarioModel = new QuestionarioModel();
 $respostaAbertaModel = new RespostaAbertaModel();
 $respostaUnicaModel = new RespostaUnicaModel();
-$questionarioModel = new QuestionarioModel();
 $pacienteModel = new PacienteModel();
 
 $acao = $_GET["acao"];
@@ -99,9 +98,18 @@ if($acao == "cadastrardados"){
     
     
     } // Fim Foreach POST
-     
+
     
  echo "<script>location.href='../paciente/Paciente.php?idPaciente=" . $idPaciente . "';</script>";
+}
+
+if($acao == "excluir"){
+    $idPaciente = $_GET['idPaciente'];
+    $idQuestionario = $_GET['idQuestionario'];
+    $questionarioModel->inativar($idQuestionario);
+
+    echo "<script>location.href='../paciente/Paciente.php?idPaciente=" . $idPaciente . "';</script>";
+
 }
 
 ?>

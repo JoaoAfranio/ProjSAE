@@ -22,7 +22,7 @@
 		$idDiagnostico = $_POST["idDiagnostico"];
 		$diagnosticoModel->excluir($idDiagnostico);
 
-		echo "<script>location.href='../diagnostico/diagnostico.php?deletar=sucesso';</script>";
+		echo "<script>location.href='../diagnostico/Diagnostico.php?deletar=sucesso';</script>";
 
 	}
 
@@ -33,7 +33,7 @@
 
 		$diagnosticoModel->editar($idDiagnostico, $descricao);
 
-		echo "<script>location.href='../diagnostico/diagnostico.php?editar=sucesso';</script>";
+		echo "<script>location.href='../diagnostico/Diagnostico.php?editar=sucesso';</script>";
 
 	}
 

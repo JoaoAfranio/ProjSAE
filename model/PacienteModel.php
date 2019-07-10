@@ -15,16 +15,18 @@
 
 
 
-		 public function inserir($codigoPaciente, $nome, $idTipoPaciente, $idUnidadeInternacao){
+		 public function inserir($codigoPaciente, $nome, $idTipoPaciente, $idUnidadeInternacao, $leito, $dataInternacao){
 
-		 	$insercao = $this->bd->prepare("INSERT INTO paciente (CodigoPaciente, Nome, IdTipoPaciente, IdUnidadeInternacao) VALUES (:codigoPaciente, :nome, :idTipoPaciente, :idUnidadeInternacao)");
-            $insercao->bindParam(":codigoPaciente", $codigoPaciente);
-            $insercao->bindParam(":nome", $nome);
-            $insercao->bindParam(":idTipoPaciente", $idTipoPaciente);
-            $insercao->bindParam(":idUnidadeInternacao", $idUnidadeInternacao);
-		 	$insercao->execute();
+         $insercao = $this->bd->prepare("INSERT INTO paciente (CodigoPaciente, Nome, IdTipoPaciente, IdUnidadeInternacao, Leito, DataInternacao ) VALUES (:codigoPaciente, :nome, :idTipoPaciente, :idUnidadeInternacao, :leito, :dataInternacao)");
+           $insercao->bindParam(":codigoPaciente", $codigoPaciente);
+           $insercao->bindParam(":nome", $nome);
+           $insercao->bindParam(":idTipoPaciente", $idTipoPaciente);
+           $insercao->bindParam(":idUnidadeInternacao", $idUnidadeInternacao);
+           $insercao->bindParam(":leito", $leito);
+           $insercao->bindParam(":dataInternacao", $dataInternacao);
+           $insercao->execute();
 
-		 }
+      }
 
 		 public function excluir($idPaciente){
 		 	$excluir = $this->bd->prepare("DELETE from paciente where idPaciente = :idPaciente");
@@ -64,8 +66,8 @@
          }
 
          public function listarInfosPaciente($idPaciente){
-            $listarInfosPaciente = $this->bd->prepare("SELECT pac.IdPaciente, pac.Nome, pac.CodigoPaciente, tpPac.IdTipoPaciente, tpPac.Descricao, ui.NomeUnidade, ui.IdUnidadeinternacao
-                                                       FROM Paciente as pac INNER JOIN tipopaciente as tpPac on tpPac.IdTipoPaciente = pac.IdTipoPaciente
+            $listarInfosPaciente = $this->bd->prepare("SELECT pac.IdPaciente, pac.Nome, pac.CodigoPaciente, tpPac.IdTipoPaciente, tpPac.Descricao, ui.NomeUnidade, ui.IdUnidadeinternacao, DATE_FORMAT(DataInternacao, '%d/%m/%Y') AS dataFormatada
+                                                       FROM paciente as pac INNER JOIN tipopaciente as tpPac on tpPac.IdTipoPaciente = pac.IdTipoPaciente
                                                                             INNER JOIN unidadeinternacao as ui on ui.IdUnidadeInternacao = pac.IdUnidadeInternacao
                                                                             WHERE pac.IdPaciente = :idPaciente");
             $listarInfosPaciente->bindParam(":idPaciente", $idPaciente, PDO::PARAM_INT);

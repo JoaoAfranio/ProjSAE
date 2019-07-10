@@ -24,7 +24,10 @@
         $idTipoPaciente = $_POST["idTipoPaciente"];
         $idUnidadeInternacao = $_POST["idUnidadeInternacao"];
 
-        $pacienteModel->inserir($codigoPaciente, $nome, $idTipoPaciente, $idUnidadeInternacao);
+        $leito = $_POST["leito"];
+        $dataInternacao = $_POST["dataInternacao"];
+
+        $pacienteModel->inserir($codigoPaciente, $nome, $idTipoPaciente, $idUnidadeInternacao, $leito, $dataInternacao);
         
         $paciente = $pacienteModel->listarUltimo($codigoPaciente);
         $idPaciente = $paciente['IdPaciente'];

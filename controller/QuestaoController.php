@@ -22,7 +22,7 @@
 		$idQuestao = $_POST["idQuestao"];
 		$questaoModel->excluir($idQuestao);
 
-		echo "<script>location.href='../questao/questao.php?deletar=sucesso';</script>";
+		echo "<script>location.href='../questao/Questao.php?deletar=sucesso';</script>";
 
 	}
 
@@ -33,7 +33,7 @@
 
 		$questaoModel->editar($idQuestao, $descricao);
 
-		echo "<script>location.href='../questao/questao.php?editar=sucesso';</script>";
+		echo "<script>location.href='../questao/Questao.php?editar=sucesso';</script>";
 
 	}
 

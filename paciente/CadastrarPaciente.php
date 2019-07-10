@@ -53,6 +53,14 @@ $resTipoPaciente = $tipoPaciente->listarTodos();
                           <?php } ?>
                         </select>                   
                       </div>
+                      <div class="form-group">
+                        <label for="inputNome">Leito</label>
+                        <input required type="text" class="form-control" name="leito" placeholder="Leito">
+                      </div>
+                      <div class="form-group">
+                        <label for="inputNome">Data de Internação</label>
+                        <input required type="date" class="form-control" name="dataInternacao" >
+                      </div>
                       <div class="text-right">
                         <button type="submit"class="btn btn-primary mr-2">Cadastar</button>
                         <button class="btn btn-light">Cancelar</button>

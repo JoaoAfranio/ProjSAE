@@ -69,7 +69,9 @@
                         <div class="row">
                           <div class="col-6">
                             <p class="d-block h4 mb-0" href="#"><?php echo $pessoa['Nome'];?></p>
-                            <p class="page-description mt-1 w-75 text-muted">Codigo paciente: <?php echo $pessoa['CodigoPaciente'];?></p>
+                            <p class="page-description mt-1 w-75 text-muted">Prontuário: <?php echo $pessoa['CodigoPaciente'];?></p>
+                            <p class="page-description mt-1 w-75 text-muted">Leito: <?php echo $pessoa['Leito'];?></p>
+                          
                             <?php 
                             foreach($resUnidadeInternacao as $unidadeInternacao){
                                 if($pessoa['IdUnidadeInternacao'] == $unidadeInternacao['IdUnidadeInternacao']){

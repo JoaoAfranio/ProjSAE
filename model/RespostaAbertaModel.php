@@ -49,7 +49,7 @@
             $listarTodasRespostasAbertasQuestionario = $this->bd->prepare("SELECT res.IdAvaliacao , questao.Descricao, rAberta.DescricaoRespostaAberta 
 											FROM resposta as res INNER JOIN questionario as quest on res.IdQuestionario = quest.IdQuestionario
 											INNER JOIN respostaaberta as rAberta on rAberta.IdResposta = res.IdResposta 
-											INNER JOIN Questao  on questao.IdQuestao = res.IdQuestao WHERE quest.IdQuestionario = :idQuestionario");
+											INNER JOIN questao  on questao.IdQuestao = res.IdQuestao WHERE quest.IdQuestionario = :idQuestionario");
             $listarTodasRespostasAbertasQuestionario->bindParam(":idQuestionario", $idQuestionario, PDO::PARAM_INT);
             $listarTodasRespostasAbertasQuestionario->execute();
 

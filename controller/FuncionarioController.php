@@ -28,7 +28,7 @@
 		$senha 	= $_POST["senha"];
 		$tipoFuncionario  = $_POST["tipoFuncionario"];
 		$funcionarioModel->atualizar($id, $nome, $login, $senha,$tipoFuncionario);
-		echo "<script>alert('Usuário atualizado com sucesso'); location.href='/pdoAlunos/funcionario/index.php';</script>";
+		echo "<script>alert('Usuário atualizado com sucesso'); location.href='/funcionario/Funcionario.php?cad=sucesso';</script>";
 	}
 
 	if($acao == "deletar"){

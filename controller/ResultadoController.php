@@ -22,7 +22,7 @@
 		$idResultado = $_POST["idResultado"];
 		$resultadoModel->excluir($idResultado);
 
-		echo "<script>location.href='../resultado/resultado.php?deletar=sucesso';</script>";
+		echo "<script>location.href='../resultado/Resultado.php?deletar=sucesso';</script>";
 
 	}
 
@@ -33,7 +33,7 @@
 
 		$resultadoModel->editar($idResultado, $descricao);
 
-		echo "<script>location.href='../resultado/resultado.php?editar=sucesso';</script>";
+		echo "<script>location.href='../resultado/Resultado.php?editar=sucesso';</script>";
 
 	}
 

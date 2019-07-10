@@ -35,8 +35,8 @@
                                             FROM resposta as res INNER JOIN questionario as quest on res.IdQuestionario = quest.IdQuestionario
                                             INNER JOIN respostamultipla as rM on rM.IdResposta = res.IdResposta
                                             INNER JOIN respostamultiplaafirmativa as rMAfirmativa on rMAfirmativa.IdResposta = rM.IdResposta
-                                            INNER JOIN Questao  on questao.IdQuestao = rMAfirmativa.IdQuestao 
-                                            INNER JOIN Afirmativa on afirmativa.IdAfirmativa = rMAfirmativa.IdAfirmativa
+                                            INNER JOIN questao  on questao.IdQuestao = rMAfirmativa.IdQuestao 
+                                            INNER JOIN afirmativa on afirmativa.IdAfirmativa = rMAfirmativa.IdAfirmativa
                                             WHERE quest.IdQuestionario = :idQuestionario");
             $listarTodasQuestoesMultiplas->bindParam(":idQuestionario", $idQuestionario, PDO::PARAM_INT);
             $listarTodasQuestoesMultiplas->execute();
@@ -52,8 +52,8 @@
                                                             FROM resposta as res INNER JOIN questionario as quest on res.IdQuestionario = quest.IdQuestionario
                                                             INNER JOIN respostamultipla as rM on rM.IdResposta = res.IdResposta
                                                             INNER JOIN respostamultiplaafirmativa as rMAfirmativa on rMAfirmativa.IdResposta = rM.IdResposta
-                                                            INNER JOIN Questao  on questao.IdQuestao = rMAfirmativa.IdQuestao 
-                                                            INNER JOIN Afirmativa on afirmativa.IdAfirmativa = rMAfirmativa.IdAfirmativa
+                                                            INNER JOIN questao  on questao.IdQuestao = rMAfirmativa.IdQuestao 
+                                                            INNER JOIN afirmativa on afirmativa.IdAfirmativa = rMAfirmativa.IdAfirmativa
                                                             WHERE quest.IdQuestionario = :idQuestionario GROUP BY questao.IdQuestao");
             $listarTodasSelectQuestoesMultipla->bindParam(":idQuestionario", $idQuestionario, PDO::PARAM_INT);
             $listarTodasSelectQuestoesMultipla->execute();

@@ -15,7 +15,7 @@
 
 		 public function inserir($idResposta, $idAfirmativa, $idQuestao){
 
-		 	$insercao = $this->bd->prepare("INSERT INTO respostaUnica (IdResposta, IdAfirmativa, IdQuestao) VALUES (:idResposta, :idAfirmativa, :idQuestao)");
+		 	$insercao = $this->bd->prepare("INSERT INTO respostaunica (IdResposta, IdAfirmativa, IdQuestao) VALUES (:idResposta, :idAfirmativa, :idQuestao)");
              $insercao->bindParam(":idResposta", $idResposta);
              $insercao->bindParam(":idAfirmativa", $idAfirmativa);
              $insercao->bindParam(":idQuestao", $idQuestao);
@@ -24,20 +24,20 @@
 		 }
 
 		 public function excluir($idRespostaUnica){
-		 	$excluir = $this->bd->prepare("DELETE from respostaUnica where idRespostaUnica = :idRespostaUnica");
+		 	$excluir = $this->bd->prepare("DELETE from respostaunica where idRespostaUnica = :idRespostaUnica");
 		 	$excluir->bindParam(":idRespostaUnica", $idRespostaUnica);
 		 	$excluir->execute();
 		 }
 
 		 public function listarTodos(){
-		 	$listar = $this->bd->query("SELECT * from respostaUnica");
+		 	$listar = $this->bd->query("SELECT * from respostaunica");
 		 	$res = $listar->fetchAll(PDO::FETCH_ASSOC);
 		 	return $res;
          }
          
          public function listarID($idRespostaUnica){
             
-            $listarUm = $this->bd->prepare("SELECT * from respostaUnica where idRespostaUnica = :idRespostaUnica");
+            $listarUm = $this->bd->prepare("SELECT * from respostaunica where idRespostaUnica = :idRespostaUnica");
             $listarUm->bindParam(":idRespostaUnica", $idRespostaUnica, PDO::PARAM_INT);
             $listarUm->execute();
 
@@ -50,8 +50,8 @@
             $listarTodasRespostasUnicasQuestionario = $this->bd->prepare("SELECT res.IdAvaliacao, questao.Descricao, afirmativa.Descricao as descricaoAfirmativa
 											FROM resposta as res INNER JOIN questionario as quest on res.IdQuestionario = quest.IdQuestionario
 											INNER JOIN respostaunica as rUnica on rUnica.IdResposta = res.IdResposta 
-											INNER JOIN Questao  on questao.IdQuestao = rUnica.IdQuestao 
-											INNER JOIN Afirmativa on afirmativa.IdAfirmativa = rUnica.IdAfirmativa
+											INNER JOIN questao  on questao.IdQuestao = rUnica.IdQuestao 
+											INNER JOIN afirmativa on afirmativa.IdAfirmativa = rUnica.IdAfirmativa
 											WHERE quest.IdQuestionario = :idQuestionario");
             $listarTodasRespostasUnicasQuestionario->bindParam(":idQuestionario", $idQuestionario, PDO::PARAM_INT);
             $listarTodasRespostasUnicasQuestionario->execute();

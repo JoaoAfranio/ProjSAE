@@ -15,7 +15,7 @@
 
 		 public function inserir($idDiagnostico, $idQuestionarioDiagPresc){
 
-		 	$insercao = $this->bd->prepare("INSERT INTO pacienteDiagnostico (IdDiagnostico, IdQuestionarioDiagPresc) VALUES (:idDiagnostico, :idQuestionarioDiagPresc)");
+		 	$insercao = $this->bd->prepare("INSERT INTO pacientediagnostico (IdDiagnostico, IdQuestionarioDiagPresc) VALUES (:idDiagnostico, :idQuestionarioDiagPresc)");
              $insercao->bindParam(":idDiagnostico", $idDiagnostico);
              $insercao->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc);
 		 	$insercao->execute();
@@ -23,21 +23,21 @@
 		 }
 
 		 public function excluir($idDiagnostico, $idQuestionarioDiagPresc){
-		 	$excluir = $this->bd->prepare("DELETE from pacienteDiagnostico where IdDiagnostico = :idDiagnostico AND IdQuestionarioDiagPresc = :idQuestionarioDiagPresc");
+		 	$excluir = $this->bd->prepare("DELETE from pacientediagnostico where IdDiagnostico = :idDiagnostico AND IdQuestionarioDiagPresc = :idQuestionarioDiagPresc");
             $excluir->bindParam(":idDiagnostico", $idDiagnostico);
             $excluir->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc);
 		 	$excluir->execute();
 		 }
 
 		 public function listarTodos(){
-		 	$listar = $this->bd->query("SELECT * from pacienteDiagnostico");
+		 	$listar = $this->bd->query("SELECT * from pacientediagnostico");
 		 	$res = $listar->fetchAll(PDO::FETCH_ASSOC);
 		 	return $res;
          }
          
          public function listarIdQuestionarioDiagPresc($idQuestionarioDiagPresc){
             
-            $listarIdQuestionarioDiagPresc = $this->bd->prepare("SELECT * from pacienteDiagnostico where IdQuestionarioDiagPresc = :idQuestionarioDiagPresc");
+            $listarIdQuestionarioDiagPresc = $this->bd->prepare("SELECT * from pacientediagnostico where IdQuestionarioDiagPresc = :idQuestionarioDiagPresc");
             $listarIdQuestionarioDiagPresc->bindParam(":idQuestionarioDiagPresc", $idQuestionarioDiagPresc);
             $listarIdQuestionarioDiagPresc->execute();
 
