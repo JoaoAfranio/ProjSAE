@@ -129,7 +129,7 @@
          
 
 
-     echo "<script>location.href='../examefisico/ExameFisico.php?idPaciente=" . $idPaciente . "&tipoPaciente=". $idTipoPaciente ."';</script>";
+     echo "<script>location.href='../exameFisico/ExameFisico.php?idPaciente=" . $idPaciente . "&tipoPaciente=". $idTipoPaciente ."';</script>";
     }
 
 	if($acao == "deletar"){
