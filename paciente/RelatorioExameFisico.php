@@ -136,17 +136,19 @@
     </div>
     <br><br><br>
       <div class="row">
-          <div class="col-lg-4"></div>
-          <div class="col-lg-4">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
           <hr style="border-color:black;">
           </div>
-          <div class="col-lg-4"></div>
+          <div class="col-sm-4"></div>
       </div>
       <div class="row">
           
-          <div class="col-lg-12">
+      <div class="col-sm-4"></div>
+          <div class="col-sm-4">
           <p style="text-align:center;">Enfermeiro</p>
           </div>
+      <div class="col-sm-4"></div>
 
       </div>
     </div>

@@ -57,7 +57,7 @@
                                 </li>
                                 <li role="tab" class="disabled last" aria-disabled="true">
                                     <a id="steps-uid-0-t-3"  aria-controls="steps-uid-0-p-3">
-                                    <span class="number">4.</span> Observação</a>
+                                    <span class="number">4.</span> Relatório de Alta</a>
                                 </li>
                             </ul>
                         </div>

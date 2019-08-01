@@ -50,6 +50,7 @@
             <!----------------------------------------------------------------------------------------------- --> 
 
             <?php
+            
             $idTipoPaciente = $resPaciente["IdTipoPaciente"];
             // 1 = Adulto
             // 2 = Pediatrico
@@ -81,6 +82,7 @@
                   <h5><?php echo $avaliacao['Descricao'];?></h5>
                   <form action="../controller/ExameFisicoController.php?acao=cadastrardados&idPaciente=<?php echo $idPaciente;?>&idTipoPaciente=<?php echo $idTipoPaciente;?>" method="post" class="forms-sample">
                     <?php
+                    $idUsuario = $_SESSION["idUsuario"];
                     $idAvaliacao = $avaliacao['IdAvaliacao'];
 
                     $resFormAvaliacao = $formularioAvaliacao->listarTodasQuestoesAplicacao($avaliacao['IdAplicacao']);

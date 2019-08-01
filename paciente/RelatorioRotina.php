@@ -98,26 +98,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                      
                                     
 
                                 </tr>
@@ -144,26 +125,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                
                                 </tr>
                             <?php } ?>
                               </tbody>
@@ -236,22 +198,22 @@
     </div>
     <br><br><br>
       <div class="row">
-          <div class="col-lg-3">
+          <div class="col-sm-3">
           </div>
-          <div class="col-lg-3">
+          <div class="col-sm-3">
           <hr style="border-color:black;">
           </div>
-          <div class="col-lg-3">
+          <div class="col-sm-3">
           <hr style="border-color:black;">
           </div>
       </div>
       <div class="row">
-          <div class="col-lg-3">
+          <div class="col-sm-3">
           </div>
-          <div class="col-lg-3">
+          <div class="col-sm-3">
           <p style="text-align:center;">Enfermeiro</p>
           </div>
-          <div class="col-lg-3">
+          <div class="col-sm-3">
           <p style="text-align:center;">Técnico de enfermagem</p>
           </div>
       </div>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/PacienteModel.php";
 require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/QuestionarioModel.php";
 require_once $_SERVER["DOCUMENT_ROOT"]	. "/sae/model/RespostaModel.php";
@@ -23,7 +23,10 @@ if($acao == "cadastrardados"){
     $idPaciente = $_GET['idPaciente'];
  
     //[A FAZER] Utilizar Session para pegar IdUsuarios
-    $idFuncionario = 21;
+    //$idFuncionario = 21;
+    $idFuncionario = $_SESSION['idUsuario'];
+    echo " $idFuncionario";
+
  
     if($idTipoPaciente == 3){
        $idFormulario = 10;
