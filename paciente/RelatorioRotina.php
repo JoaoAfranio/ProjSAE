@@ -180,7 +180,7 @@
               <div class="col-md-12 grid-margin stretch-card">
                           <div class="card">
                             <div class="card-body">
-                              <h5>Observação</h5>
+                              <h5>Relatório de Alta</h5>
                               <p class="text-muted"></i><?php 
                               if($resQuestionarioDiagPresc["Evolucao"] == " "){
                                 echo "Nenhuma evolução aparente";
